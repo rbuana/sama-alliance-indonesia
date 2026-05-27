@@ -556,6 +556,19 @@
       .craft-grid, .whats-grid { grid-template-columns: 1fr; }
       .awards-row { grid-template-columns: repeat(2, 1fr); }
       .feature-card::before { display: none; }
+      /* Hide product UI mock on mobile — card text is self-contained */
+      .feature-card .cv-product { display: none; }
+      /* Collapse hero right panel */
+      .cv-split .cv-product { display: none; }
+      /* Journey: stack donut above panels */
+      .journey-layout { gap: 40px; }
+      .journey-svg-wrap { max-width: 320px; }
+    }
+    @media (max-width: 600px) {
+      .logo-row { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .awards-row { grid-template-columns: repeat(2, 1fr); }
+      .feature-card { padding: 36px 28px; }
     }
   </style>
 </head>
