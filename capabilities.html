@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capabilities — SAMA Alliance Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* ---- CV UI (shared with homepage lifecycle panels) ---- */
+    .cv-ui {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 16px 40px -12px rgba(10,31,61,0.18);
+      display: flex; flex-direction: column; gap: 12px;
+      height: 100%;
+    }
+    .cv-ui-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #eee; font-family: var(--font-mono); font-size: 11px; color: var(--ink); }
+    .cv-ui-top .pill { background: var(--fire); color: white; padding: 4px 10px; border-radius: 100px; font-size: 10px; letter-spacing: 0.08em; }
+    .cv-ui-headline { font-family: var(--font-display); font-size: clamp(18px, 1.8vw, 22px); letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; }
+    .cv-ui-rows { display: flex; flex-direction: column; gap: 8px; }
+    .cv-ui-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #eee; border-radius: 8px; font-size: 12px; color: var(--ink); }
+    .cv-ui-row .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fire); flex-shrink: 0; }
+    .cv-ui-row .dot.g { background: #4caf50; }
+    .cv-ui-row .dot.b { background: #2196f3; }
+    .cv-ui-row .grow { flex: 1; }
+    .cv-ui-row .mono-sm { font-family: var(--font-mono); font-size: 10px; color: var(--muted-on-cream); }
+
+    /* ---- Lifecycle tabs ---- */
+    .lifecycle { padding: clamp(80px, 10vw, 140px) 0; background: white; }
+    .lc-head { text-align: center; max-width: 760px; margin: 0 auto 64px; }
+    .lc-head h2 { font-size: clamp(36px, 4.6vw, 60px); letter-spacing: -0.03em; line-height: 1.0; }
+    .lc-head p { font-size: 18px; color: var(--muted-on-cream); margin-top: 16px; }
+    .lc-tabs { display: flex; gap: 4px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; border-bottom: 1px solid var(--line-dark); }
+    .lc-tab { padding: 16px 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-on-cream); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 160ms; background: transparent; }
+    .lc-tab.active { color: var(--fire); border-bottom-color: var(--fire); }
+    .lc-tab:hover:not(.active) { color: var(--ink); }
+    .lc-panel { display: none; }
+    .lc-panel.active { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(40px, 5vw, 72px); align-items: center; }
+    .lc-panel .copy h3 { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.02em; line-height: 1.05; }
+    .lc-panel .copy .lead { font-size: 17px; color: var(--muted-on-cream); line-height: 1.55; margin: 18px 0 28px; }
+    .lc-panel .copy ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+    .lc-panel .copy li { display: flex; gap: 14px; align-items: flex-start; font-size: 15px; color: var(--ink); padding: 14px 16px; border: 1px solid var(--line-dark); border-radius: 8px; transition: background 160ms; }
+    .lc-panel .copy li:hover { background: var(--cream); }
+    .lc-panel .copy li .ix { flex-shrink: 0; font-family: var(--font-mono); font-size: 11px; color: var(--fire); letter-spacing: 0.1em; width: 36px; }
+    .lc-panel .copy li strong { display: block; margin-bottom: 2px; }
+    .lc-panel .copy li small { color: var(--muted-on-cream); font-size: 13px; }
+    .lc-visual { aspect-ratio: 4/3.2; background: linear-gradient(135deg, #ece6da, #d9d2c4); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; }
+
+    /* ---- Craft grid ---- */
+    .craft-grid-section { padding: clamp(80px, 10vw, 120px) 0; background: var(--cream); }
+    .craft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .craft-card { background: white; border: 1px solid var(--line-dark); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 200ms, box-shadow 200ms; }
+    .craft-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(10,31,61,0.18); }
+    .craft-card .ci { height: 180px; background: linear-gradient(135deg, #f5e8d8, #ece1cd); padding: 24px; position: relative; overflow: hidden; }
+    .craft-card .ci.ink { background: linear-gradient(135deg, #182d52, #0a1f3d); }
+    .craft-card .ci.fire { background: linear-gradient(135deg, #ff6b3d, #ff4719); }
+    .craft-card .ci.teal { background: linear-gradient(135deg, #1a4d4a, #0d2e2c); }
+    .craft-card .ci.amber { background: linear-gradient(135deg, #5c3a00, #3a2400); }
+    .craft-card .ci .mini-ui { background: white; border-radius: 8px; padding: 10px 12px; box-shadow: 0 12px 30px -10px rgba(0,0,0,0.18); display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 10px; color: var(--ink); max-width: 90%; position: absolute; bottom: 18px; left: 18px; right: 18px; }
+    .craft-card .ci .mini-ui .b { height: 6px; background: var(--cream-2); border-radius: 3px; }
+    .craft-card .ci .mini-ui .b.fire { background: var(--fire); width: 60%; }
+    .craft-card .ci .mini-ui .b.short { width: 40%; }
+    .craft-card .ci .mini-ui .b.long { width: 80%; }
+    .craft-card .ci .corner-tag { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.92); color: var(--ink); padding: 4px 10px; border-radius: 100px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; }
+    .craft-card .cb { padding: 24px 24px 28px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+    .craft-card .cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fire); }
+    .craft-card h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; }
+    .craft-card p { font-size: 14px; color: var(--muted-on-cream); margin: 0; line-height: 1.5; flex-grow: 1; }
+    .craft-card .specialists { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .craft-card .sp-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--fire); background: rgba(255,71,25,0.07); border: 1px solid rgba(255,71,25,0.2); padding: 3px 8px; border-radius: 100px; }
+    .craft-card .link { color: var(--ink); font-weight: 500; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; margin-top: 8px; }
+    .craft-card .link::after { content: '→'; transition: transform 200ms; color: var(--fire); }
+    .craft-card:hover .link::after { transform: translateX(4px); }
+
+    /* ---- How we staff section ---- */
+    .staffing { padding: clamp(80px, 10vw, 120px) 0; background: var(--ink); color: var(--cream); }
+    .staffing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 56px; }
+    .staffing-item { background: rgba(255,255,255,0.04); padding: 40px 32px; display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--line); }
+    .staffing-item:hover { background: rgba(255,255,255,0.07); }
+    .staffing-item .si-num { font-family: var(--font-mono); font-size: 11px; color: var(--fire-glow); letter-spacing: 0.14em; }
+    .staffing-item h3 { font-size: 22px; color: var(--cream); line-height: 1.1; }
+    .staffing-item p { font-size: 14px; color: var(--muted-on-ink); margin: 0; line-height: 1.6; }
+
+    @media (max-width: 980px) {
+      .lc-panel.active { grid-template-columns: 1fr; }
+      .lc-visual { display: none; }
+      .craft-grid { grid-template-columns: repeat(2, 1fr); }
+      .staffing-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .craft-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="capabilities">
+
+  <div id="site-nav"></div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE HEADER                                                    -->
+  <!-- ============================================================ -->
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow on-ink">What we do together</span>
+      <h1>Eight disciplines.<br />One integrated stack.</h1>
+      <p class="lede">Every specialist pulled per brief — pre-aligned, pre-contracted, ready to ship from day one. No re-briefing tax. No agency politics.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- LIFECYCLE (HOW A BRIEF MOVES)                                 -->
+  <!-- ============================================================ -->
+  <section class="lifecycle">
+    <div class="wrap">
+      <div class="lc-head">
+        <span class="eyebrow" style="margin: 0 auto;">How a brief moves through the alliance</span>
+        <h2 style="margin-top: 20px;">Your campaign lifecycle,<br />from brief to outcome.</h2>
+        <p>Shared tools, shared rituals, shared P&amp;L — work moves between studios like it's one building.</p>
+      </div>
+
+      <div class="lc-tabs" role="tablist">
+        <button class="lc-tab active" data-tab="intake">01 · Intake</button>
+        <button class="lc-tab" data-tab="assemble">02 · Assemble</button>
+        <button class="lc-tab" data-tab="execute">03 · Execute</button>
+        <button class="lc-tab" data-tab="prove">04 · Prove</button>
+      </div>
+
+      <div class="lc-panel active" data-panel="intake">
+        <div class="copy">
+          <h3>Single intake, single accountable lead.</h3>
+          <p class="lead">Your brief lands once at the alliance secretariat. Within 48 hours, a regional lead becomes your single contact — no re-briefing across five vendors.</p>
+          <ul>
+            <li><span class="ix">01</span><div><strong>Brief intake call</strong><small>Working session within 48 hours to align on business outcomes.</small></div></li>
+            <li><span class="ix">02</span><div><strong>Cultural &amp; market read</strong><small>Strategy lead sets the consumer truth before recommending tactics.</small></div></li>
+            <li><span class="ix">03</span><div><strong>Commercial framing</strong><small>One contract, one P&amp;L. No procurement gridlock across vendors.</small></div></li>
+          </ul>
+        </div>
+        <div class="lc-visual">
+          <div class="cv-ui">
+            <div class="cv-ui-top"><span>BRIEF DESK</span><span class="pill">48H</span></div>
+            <div class="cv-ui-headline">New brief · Consumer goods</div>
+            <div class="cv-ui-rows">
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">Industry &amp; audience captured</span><span class="mono-sm">DONE</span></div>
+              <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Outcome metric agreed</span><span class="mono-sm">DONE</span></div>
+              <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Commercial framing signed</span><span class="mono-sm">DONE</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lc-panel" data-panel="assemble">
+        <div class="copy">
+          <h3>The right specialists, not the next in queue.</h3>
+          <p class="lead">We pick from across the ten agencies based on craft fit, not on whose turn it is. The result: a team you would have hand-picked yourself.</p>
+          <ul>
+            <li><span class="ix">01</span><div><strong>Craft-based selection</strong><small>Best PR shop runs PR. Best gaming studio runs gaming. Every time.</small></div></li>
+            <li><span class="ix">02</span><div><strong>Founder-level senior team</strong><small>The people who pitch you are the people who do the work.</small></div></li>
+            <li><span class="ix">03</span><div><strong>Pre-aligned ways of working</strong><small>Shared toolkit, naming, status cadence — no re-onboarding tax.</small></div></li>
+          </ul>
+        </div>
+        <div class="lc-visual">
+          <div class="cv-ui">
+            <div class="cv-ui-top"><span>TEAM COMPOSER</span><span class="pill">AUTO</span></div>
+            <div class="cv-ui-headline">FMCG launch team · 4 specialists</div>
+            <div class="cv-ui-rows">
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">Ideoworks · Brand lead</span><span class="mono-sm">CRAFT</span></div>
+              <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Seven Ads · Production</span><span class="mono-sm">CRAFT</span></div>
+              <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Meson Digital · Performance</span><span class="mono-sm">CRAFT</span></div>
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">KIM · Earned amplification</span><span class="mono-sm">CRAFT</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lc-panel" data-panel="execute">
+        <div class="copy">
+          <h3>Borderless execution across every channel.</h3>
+          <p class="lead">From Sabang to Merauke, from TVC to TikTok — the team ships in lockstep. One status cadence, one Slack channel, one weekly stand-up across studios.</p>
+          <ul>
+            <li><span class="ix">01</span><div><strong>Single delivery ritual</strong><small>One weekly stand-up across all studios on the brief.</small></div></li>
+            <li><span class="ix">02</span><div><strong>Shared production pipeline</strong><small>Brand assets, content, code flow through a common drive and PM tool.</small></div></li>
+            <li><span class="ix">03</span><div><strong>Live channel orchestration</strong><small>Media, social, PR and tech move in real time — coordinated centrally.</small></div></li>
+          </ul>
+        </div>
+        <div class="lc-visual">
+          <div class="cv-ui">
+            <div class="cv-ui-top"><span>CHANNEL ORCHESTRATOR</span><span class="pill">LIVE</span></div>
+            <div class="cv-ui-headline">Week 6 · 14 channels active</div>
+            <div class="cv-ui-rows">
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">TVC · live on Trans7, RCTI</span><span class="mono-sm">ON AIR</span></div>
+              <div class="cv-ui-row"><span class="dot g"></span><span class="grow">TikTok · 4 creators activated</span><span class="mono-sm">LIVE</span></div>
+              <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Meta &amp; Search · scaling</span><span class="mono-sm">+18%</span></div>
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">Earned media · 24 placements</span><span class="mono-sm">TIER 1</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lc-panel" data-panel="prove">
+        <div class="copy">
+          <h3>Outcomes tied to your CFO's spreadsheet.</h3>
+          <p class="lead">We don't ship vanity decks. Quarterly business reviews show what we'd kill, what we'd scale, and how marketing moved the business.</p>
+          <ul>
+            <li><span class="ix">01</span><div><strong>Outcome-linked dashboards</strong><small>Brand lift, pipeline, revenue contribution — not just impressions.</small></div></li>
+            <li><span class="ix">02</span><div><strong>Cross-channel attribution</strong><small>Built and operated by Meson Digital + Omeoo in-house.</small></div></li>
+            <li><span class="ix">03</span><div><strong>Quarterly business review</strong><small>Honest reflection: what worked, what didn't, what changes next quarter.</small></div></li>
+          </ul>
+        </div>
+        <div class="lc-visual">
+          <div class="cv-ui">
+            <div class="cv-ui-top"><span>OUTCOMES BOARD</span><span class="pill">Q3</span></div>
+            <div class="cv-ui-headline">Business impact · launch campaign</div>
+            <div class="cv-ui-rows">
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">Aided awareness · target +40%</span><span class="mono-sm">+44%</span></div>
+              <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Trial sales · target 120K units</span><span class="mono-sm">138K</span></div>
+              <div class="cv-ui-row"><span class="dot b"></span><span class="grow">CPA · target IDR 28K</span><span class="mono-sm">IDR 22K</span></div>
+              <div class="cv-ui-row"><span class="dot"></span><span class="grow">Earned reach</span><span class="mono-sm">42M</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CRAFT DISCIPLINE GRID                                          -->
+  <!-- ============================================================ -->
+  <section class="craft-grid-section">
+    <div class="wrap">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;">
+        <div>
+          <span class="eyebrow">The full stack</span>
+          <h2 style="margin-top: 20px; font-size: clamp(32px, 4vw, 52px);">Eight disciplines, assembled per brief.</h2>
+        </div>
+        <p style="font-size: 17px; color: var(--muted-on-cream); margin: 0;">Pick one discipline or all eight — the alliance scales from a single specialist engagement to a full integrated campaign.</p>
+      </div>
+
+      <div class="craft-grid">
+        <article class="craft-card">
+          <div class="ci">
+            <span class="corner-tag">STRATEGY</span>
+            <div class="mini-ui">
+              <div class="b long"></div><div class="b fire"></div><div class="b short"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Brand &amp; Strategy</span>
+            <h3>Position to win with cultural intelligence</h3>
+            <p>Naming, positioning, brand architecture and consumer research grounded in Indonesian truth — not a global playbook.</p>
+            <div class="specialists">
+              <span class="sp-tag">Ideoworks</span>
+              <span class="sp-tag">Krona</span>
+              <span class="sp-tag">KIM</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci ink">
+            <span class="corner-tag">CREATIVE</span>
+            <div class="mini-ui">
+              <div class="b fire"></div><div class="b long"></div><div class="b short"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Creative &amp; Content</span>
+            <h3>Big-idea campaigns and always-on social</h3>
+            <p>Flagship campaigns to weekly TikTok cadence — creative built natively for every Indonesian platform, format, and moment.</p>
+            <div class="specialists">
+              <span class="sp-tag">Naik Kreatif</span>
+              <span class="sp-tag">Ideoworks</span>
+              <span class="sp-tag">Seven Ads</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci">
+            <span class="corner-tag">MEDIA</span>
+            <div class="mini-ui">
+              <div class="b long"></div><div class="b short"></div><div class="b fire"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Performance &amp; Media</span>
+            <h3>Paid media as a single optimized P&amp;L</h3>
+            <p>Paid social, search, programmatic, retail media — planned, bought, and measured as one integrated investment.</p>
+            <div class="specialists">
+              <span class="sp-tag">Meson Digital</span>
+              <span class="sp-tag">ADX Asia</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci fire">
+            <span class="corner-tag">EARNED</span>
+            <div class="mini-ui">
+              <div class="b"></div><div class="b fire"></div><div class="b long"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">PR, Comms &amp; Events</span>
+            <h3>Earned media wired into the cultural moment</h3>
+            <p>Earned, crisis, executive comms, and launch PR &amp; event activation — moving in real time with the news and culture cycle.</p>
+            <div class="specialists">
+              <span class="sp-tag">KIM Comm &amp; Udari</span>
+              <span class="sp-tag">Naik Kreatif</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci ink">
+            <span class="corner-tag">TECH</span>
+            <div class="mini-ui">
+              <div class="b long"></div><div class="b fire"></div><div class="b short"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Technology &amp; Product</span>
+            <h3>Engineering that ships, not slideware</h3>
+            <p>Web, mobile, e-commerce, AI-powered tooling, and MarTech stack design — end-to-end, production-grade.</p>
+            <div class="specialists">
+              <span class="sp-tag">Omeoo</span>
+              <span class="sp-tag">Meson Digital</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci">
+            <span class="corner-tag">DATA + CX</span>
+            <div class="mini-ui">
+              <div class="b fire"></div><div class="b short"></div><div class="b long"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Data &amp; Customer Experience</span>
+            <h3>Hear, decide, respond — at speed</h3>
+            <p>CDP, social listening, journey design, contact-center transformation. Turn customer signals into brand actions in days.</p>
+            <div class="specialists">
+              <span class="sp-tag">Ivosights</span>
+              <span class="sp-tag">Omeoo</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci teal">
+            <span class="corner-tag">INFLUENCE</span>
+            <div class="mini-ui">
+              <div class="b long"></div><div class="b fire"></div><div class="b short"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Influencer &amp; Creator</span>
+            <h3>Indonesia's creator economy, fully activated</h3>
+            <p>Nano to mega — strategy, sourcing, briefing, production, compliance, and measurement across every Indonesian platform.</p>
+            <div class="specialists">
+              <span class="sp-tag">Naik Kreatif</span>
+              <span class="sp-tag">ADX Asia</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+
+        <article class="craft-card">
+          <div class="ci amber">
+            <span class="corner-tag">GAMING</span>
+            <div class="mini-ui">
+              <div class="b short"></div><div class="b fire"></div><div class="b long"></div>
+            </div>
+          </div>
+          <div class="cb">
+            <span class="cat">Gaming &amp; Entertainment</span>
+            <h3>Reach Indonesia's 100M+ gaming audience</h3>
+            <p>In-game advertising, esports sponsorship, gaming creator campaigns, and IP integrations — built for mobile-first Indonesia.</p>
+            <div class="specialists">
+              <span class="sp-tag">Krona</span>
+              <span class="sp-tag">ADX Asia</span>
+            </div>
+            <a href="members.html" class="link">View specialists</a>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <a href="members.html" class="btn btn-outline-ink">Meet all ten member agencies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- HOW WE STAFF                                                   -->
+  <!-- ============================================================ -->
+  <section class="staffing">
+    <div class="wrap">
+      <span class="eyebrow on-ink">Why it works</span>
+      <h2 style="font-size: clamp(32px, 4vw, 52px); margin-top: 20px; max-width: 22ch;">Pre-aligned, pre-contracted, ready the moment a brief arrives.</h2>
+
+      <div class="staffing-grid">
+        <div class="staffing-item">
+          <span class="si-num">01</span>
+          <h3>No competitive conflicts</h3>
+          <p>Each member is the best in their category and non-competing. One PR agency. One performance shop. One tech studio. The best — not the cheapest.</p>
+        </div>
+        <div class="staffing-item">
+          <span class="si-num">02</span>
+          <h3>One contract, one invoice</h3>
+          <p>The alliance is the commercial entity. You contract once, get one invoice, and hold one party accountable — regardless of how many studios are activated.</p>
+        </div>
+        <div class="staffing-item">
+          <span class="si-num">03</span>
+          <h3>Shared operating system</h3>
+          <p>All ten agencies use the same briefing templates, project management cadence, and delivery rituals. Onboarding is instant. Ramp-up time is near zero.</p>
+        </div>
+        <div class="staffing-item">
+          <span class="si-num">04</span>
+          <h3>Founder-led teams</h3>
+          <p>Every member is an independent agency. The people in the room are the founders and principals — not account managers managing delivery elsewhere.</p>
+        </div>
+        <div class="staffing-item">
+          <span class="si-num">05</span>
+          <h3>Transparent P&amp;L</h3>
+          <p>You see where every dollar goes. Scope, fees, and sub-contractor allocations are shared at the outset — not discovered at reconciliation.</p>
+        </div>
+        <div class="staffing-item">
+          <span class="si-num">06</span>
+          <h3>Outcome-first culture</h3>
+          <p>Every brief ships with agreed business KPIs. Every quarterly review is honest about what worked, what failed, and what changes. No spin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CTA BAND                                                       -->
+  <!-- ============================================================ -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Ready to brief the alliance?</h2>
+      <p class="lede">Drop a business challenge — not a finished RFP. A regional lead will respond within 48 hours with a proposed team composition.</p>
+      <div class="row">
+        <a href="contact.html" class="btn btn-primary">Start a conversation →</a>
+        <a href="members.html" class="btn btn-outline">Explore the member roster</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="assets/tweaks.jsx"></script>
+  <script src="assets/site.js"></script>
+
+  <script>
+    (function () {
+      const tabs = document.querySelectorAll('.lc-tab');
+      const panels = document.querySelectorAll('.lc-panel');
+      tabs.forEach(t => t.addEventListener('click', () => {
+        const target = t.dataset.tab;
+        tabs.forEach(x => x.classList.toggle('active', x === t));
+        panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
+      }));
+    })();
+  </script>
+</body>
+</html>

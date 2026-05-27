@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insights &amp; Events — SAMA Alliance Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* ---- Filter tabs ---- */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 56px; }
+    .filter-btn { padding: 10px 20px; border: 1px solid var(--line-dark); border-radius: 100px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-on-cream); background: white; cursor: pointer; transition: all 160ms; }
+    .filter-btn.active, .filter-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+    /* ---- Featured event ---- */
+    .featured-event {
+      background: var(--ink);
+      border-radius: 16px;
+      padding: clamp(40px, 5vw, 64px);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 64px;
+    }
+    .featured-event::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -60px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(255,71,25,0.35), transparent 70%);
+      pointer-events: none;
+    }
+    .featured-event .fe-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fire-glow); margin-bottom: 16px; }
+    .featured-event h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -0.02em; line-height: 1.05; color: var(--cream); }
+    .featured-event p { font-size: 17px; color: var(--muted-on-ink); margin: 16px 0 28px; line-height: 1.55; max-width: 52ch; }
+    .featured-event .fe-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+    .featured-event .fe-meta span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-on-ink); display: flex; align-items: center; gap: 6px; }
+    .featured-event .fe-meta span::before { content: '◈'; color: var(--fire-glow); }
+    .fe-visual {
+      width: 240px;
+      flex-shrink: 0;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, rgba(255,71,25,0.3), rgba(255,71,25,0.05));
+      border: 1px solid rgba(255,71,25,0.25);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+    }
+    .fe-visual .date-block { text-align: center; }
+    .fe-visual .date-block .month { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fire-glow); }
+    .fe-visual .date-block .day { font-family: var(--font-display); font-size: 72px; letter-spacing: -0.04em; line-height: 1; color: var(--cream); }
+    .fe-visual .date-block .year { font-family: var(--font-mono); font-size: 11px; color: var(--muted-on-ink); letter-spacing: 0.12em; }
+
+    /* ---- Content cards ---- */
+    .content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .content-card {
+      border: 1px solid var(--line-dark);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      transition: transform 200ms, box-shadow 200ms;
+    }
+    .content-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(10,31,61,0.15); }
+    .content-card .cc-thumb {
+      height: 160px;
+      background: linear-gradient(135deg, #ece6da, #d9d2c4);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    .content-card .cc-thumb.fire { background: linear-gradient(135deg, #ff6b3d, #c8290f); }
+    .content-card .cc-thumb.ink { background: linear-gradient(135deg, #182d52, #0a1f3d); }
+    .content-card .cc-thumb.teal { background: linear-gradient(135deg, #1a4d4a, #0d2e2c); }
+    .content-card .cc-thumb.amber { background: linear-gradient(135deg, #5c3a00, #3a2400); }
+    .content-card .cc-type { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(255,255,255,0.92); color: var(--ink); padding: 4px 10px; border-radius: 100px; }
+    .content-card .cc-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+    .content-card .cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fire); }
+    .content-card h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.15; }
+    .content-card p { font-size: 14px; color: var(--muted-on-cream); margin: 0; line-height: 1.5; flex-grow: 1; }
+    .content-card .cc-meta { font-family: var(--font-mono); font-size: 11px; color: var(--muted-on-cream); padding-top: 12px; border-top: 1px solid var(--line-dark); margin-top: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .content-card .link { color: var(--ink); font-weight: 500; font-size: 14px; display: inline-flex; gap: 6px; align-items: center; }
+    .content-card .link::after { content: '→'; color: var(--fire); transition: transform 200ms; }
+    .content-card:hover .link::after { transform: translateX(4px); }
+
+    /* ---- Resource chips ---- */
+    .resources { padding: clamp(60px, 8vw, 100px) 0; background: var(--cream-2); }
+    .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px; }
+    .res-card { background: white; border: 1px solid var(--line-dark); border-radius: 10px; padding: 24px 28px; display: flex; gap: 20px; align-items: flex-start; transition: background 160ms, transform 160ms; }
+    .res-card:hover { background: var(--cream); transform: translateY(-2px); }
+    .res-card .rc-icon { width: 44px; height: 44px; border-radius: 8px; background: var(--ink); color: var(--fire-glow); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .res-card .rc-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-on-cream); margin-bottom: 6px; }
+    .res-card h4 { font-size: 18px; letter-spacing: -0.01em; line-height: 1.2; margin: 0 0 8px; }
+    .res-card p { font-size: 14px; color: var(--muted-on-cream); margin: 0 0 12px; line-height: 1.5; }
+    .res-card .rc-cta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--fire); text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+
+    /* ---- Newsletter ---- */
+    .newsletter { padding: clamp(80px, 10vw, 120px) 0; background: var(--ink); color: var(--cream); }
+    .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+    .newsletter h2 { font-size: clamp(32px, 4vw, 52px); letter-spacing: -0.03em; line-height: 1.0; color: var(--cream); }
+    .newsletter p { font-size: 17px; color: var(--muted-on-ink); margin: 18px 0 0; line-height: 1.55; }
+    .nl-form { display: flex; flex-direction: column; gap: 16px; }
+    .nl-form input[type="email"] { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--line); border-radius: 6px; color: var(--cream); font-family: var(--font-sans); font-size: 16px; padding: 16px 20px; transition: border-color 160ms; }
+    .nl-form input[type="email"]:focus { outline: none; border-color: var(--fire); }
+    .nl-form input::placeholder { color: rgba(245,241,234,0.35); }
+    .nl-form .nl-note { font-family: var(--font-mono); font-size: 11px; color: var(--muted-on-ink); letter-spacing: 0.06em; }
+
+    @media (max-width: 980px) {
+      .featured-event { grid-template-columns: 1fr; }
+      .fe-visual { display: none; }
+      .content-grid { grid-template-columns: repeat(2, 1fr); }
+      .res-grid { grid-template-columns: 1fr; }
+      .newsletter-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .content-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="insights">
+
+  <div id="site-nav"></div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE HEADER                                                    -->
+  <!-- ============================================================ -->
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow on-ink">SAMA Alliance Indonesia</span>
+      <h1>Insights,<br />events &amp;<br />resources.</h1>
+      <p class="lede">Thinking from across the alliance — on Indonesian marketing, brand-building, and what the best independent agencies are doing differently.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FILTER + CONTENT GRID                                          -->
+  <!-- ============================================================ -->
+  <section class="section-cream" style="padding: clamp(80px, 10vw, 120px) 0;">
+    <div class="wrap">
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="event">Events</button>
+        <button class="filter-btn" data-filter="report">Reports</button>
+        <button class="filter-btn" data-filter="article">Articles</button>
+        <button class="filter-btn" data-filter="education">Education</button>
+      </div>
+
+      <!-- Featured Event -->
+      <div class="featured-event" data-type="event">
+        <div>
+          <div class="fe-tag">Flagship event · Registration open</div>
+          <h2>SAMA APAC Summit 2026<br />— Bali, Indonesia</h2>
+          <p>Three days of working sessions, keynotes, and agency collaboration across SAMA's seven national regions. The region's only event built by independent agencies, for independent agencies and the brands that choose them.</p>
+          <div class="fe-meta">
+            <span>March 12–14, 2026</span>
+            <span>Bali, Indonesia</span>
+            <span>300+ attendees</span>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="contact.html" class="btn btn-primary">Register now →</a>
+            <a href="#" class="btn btn-outline">Download agenda</a>
+          </div>
+        </div>
+        <div class="fe-visual">
+          <div class="date-block">
+            <div class="month">March</div>
+            <div class="day">12</div>
+            <div class="year">2026</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content cards -->
+      <div class="content-grid" id="content-grid">
+
+        <article class="content-card" data-type="report">
+          <div class="cc-thumb ink">
+            <span class="cc-type">Report</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Trends Report</span>
+            <h3>Marketing in Indonesia 2026: the alliance trends report</h3>
+            <p>The death of the network agency, the rise of borderless teams, and what changes for CMOs this year. Data from 120 Indonesian brand marketers.</p>
+            <a href="#" class="link">Download the eBook</a>
+            <div class="cc-meta"><span>January 2026</span><span>Free download</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="article">
+          <div class="cc-thumb fire">
+            <span class="cc-type">Article</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Strategy</span>
+            <h3>Why the 'one-stop-shop' pitch is killing your campaign output</h3>
+            <p>The promise of doing everything in one place sounds efficient. Here's why it produces mediocre work — and what the best brands are doing instead.</p>
+            <a href="#" class="link">Read the article</a>
+            <div class="cc-meta"><span>February 2026</span><span>8 min read</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="education">
+          <div class="cc-thumb teal">
+            <span class="cc-type">Certification</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Certification</span>
+            <h3>Grow your craft and certify your SAMA expertise</h3>
+            <p>Quarterly cross-agency certification programs covering strategy, performance, and integrated campaign management. Free for member-agency practitioners.</p>
+            <a href="contact.html" class="link">Apply for next cohort</a>
+            <div class="cc-meta"><span>Year-round</span><span>Free for members</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="article">
+          <div class="cc-thumb">
+            <span class="cc-type">Article</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Indonesia Market</span>
+            <h3>How Ramadan 2025 changed the content calendar for good</h3>
+            <p>Real-time cultural moments are no longer seasonal. SAMA Indonesia agencies share how the best brands adapted their always-on strategies last year.</p>
+            <a href="#" class="link">Read the article</a>
+            <div class="cc-meta"><span>March 2026</span><span>6 min read</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="report">
+          <div class="cc-thumb amber">
+            <span class="cc-type">Playbook</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Playbook</span>
+            <h3>The APAC market entry playbook: Indonesia first</h3>
+            <p>For international brands considering Indonesia as an entry point to Southeast Asia — what to know, who to work with, and what mistakes to avoid.</p>
+            <a href="#" class="link">Download the playbook</a>
+            <div class="cc-meta"><span>December 2025</span><span>Free download</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="event">
+          <div class="cc-thumb ink">
+            <span class="cc-type">Event</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Roundtable · Jakarta</span>
+            <h3>CMO Roundtable: building brand in Indonesia's creator economy</h3>
+            <p>Invitation-only working session for senior brand marketers. SAMA regional leads moderate a 2-hour discussion on influencer strategy, measurement, and what actually works.</p>
+            <a href="contact.html" class="link">Request an invitation</a>
+            <div class="cc-meta"><span>April 2026</span><span>Invite only · Jakarta</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="article">
+          <div class="cc-thumb fire">
+            <span class="cc-type">Article</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Performance</span>
+            <h3>AI in Indonesian campaigns: what's working in 2026</h3>
+            <p>Generative creative, automated media buying, social listening AI — a candid view from Meson Digital and Omeoo on what moved the needle and what didn't.</p>
+            <a href="#" class="link">Read the article</a>
+            <div class="cc-meta"><span>April 2026</span><span>10 min read</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="education">
+          <div class="cc-thumb teal">
+            <span class="cc-type">Webinar</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Webinar Series</span>
+            <h3>How to brief an alliance: a guide for brand-side marketers</h3>
+            <p>A 45-minute live session covering how integrated alliance briefs differ from single-agency briefs — and how to write one that gets the best response.</p>
+            <a href="contact.html" class="link">Register for next session</a>
+            <div class="cc-meta"><span>Monthly</span><span>Free to attend</span></div>
+          </div>
+        </article>
+
+        <article class="content-card" data-type="report">
+          <div class="cc-thumb">
+            <span class="cc-type">Report</span>
+          </div>
+          <div class="cc-body">
+            <span class="cat">Agency Model</span>
+            <h3>The independent agency model guide: why leading brands are switching</h3>
+            <p>A data-backed case for why mid-market and enterprise brands in Indonesia are replacing network retainers with specialist alliances — and how they're structuring the transition.</p>
+            <a href="#" class="link">Download the guide</a>
+            <div class="cc-meta"><span>November 2025</span><span>Free download</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- RESOURCES                                                      -->
+  <!-- ============================================================ -->
+  <section class="resources">
+    <div class="wrap">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;">
+        <div>
+          <span class="eyebrow">Quick reads</span>
+          <h2 style="margin-top: 20px; font-size: clamp(32px, 4vw, 52px);">Resources worth your time.</h2>
+        </div>
+        <p style="font-size: 17px; color: var(--muted-on-cream); margin: 0;">Short, practical reads from the SAMA Indonesia member network. No gated forms, no sales follow-up.</p>
+      </div>
+
+      <div class="res-grid">
+        <a href="#" class="res-card" style="text-decoration: none; color: inherit;">
+          <div class="rc-icon">◎</div>
+          <div>
+            <div class="rc-label">Guide · 5 min</div>
+            <h4>2026 marketing trends for Indonesia</h4>
+            <p>Ten shifts reshaping how Indonesian consumers discover, evaluate, and buy — sourced from campaign data across all ten member agencies.</p>
+            <span class="rc-cta">Read now ↗</span>
+          </div>
+        </a>
+
+        <a href="#" class="res-card" style="text-decoration: none; color: inherit;">
+          <div class="rc-icon">⟳</div>
+          <div>
+            <div class="rc-label">Guide · 7 min</div>
+            <h4>How to brief an alliance (vs. a single agency)</h4>
+            <p>A practical template for structuring an integrated brief that gets the best from a multi-studio team without adding layers of management overhead.</p>
+            <span class="rc-cta">Read now ↗</span>
+          </div>
+        </a>
+
+        <a href="#" class="res-card" style="text-decoration: none; color: inherit;">
+          <div class="rc-icon">↑</div>
+          <div>
+            <div class="rc-label">Playbook · 12 min</div>
+            <h4>AI in Indonesian campaigns: the honest guide</h4>
+            <p>What AI tools are delivering real results in 2026, what's still hype, and how SAMA agencies are integrating them into production workflows.</p>
+            <span class="rc-cta">Read now ↗</span>
+          </div>
+        </a>
+
+        <a href="#" class="res-card" style="text-decoration: none; color: inherit;">
+          <div class="rc-icon">◈</div>
+          <div>
+            <div class="rc-label">Report · 15 min</div>
+            <h4>APAC market entry: Indonesia as your first market</h4>
+            <p>The regulatory landscape, consumer segmentation, digital infrastructure, and agency ecosystem for international brands considering Indonesia as a base.</p>
+            <span class="rc-cta">Read now ↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- NEWSLETTER                                                     -->
+  <!-- ============================================================ -->
+  <section class="newsletter">
+    <div class="wrap">
+      <div class="newsletter-inner">
+        <div>
+          <span class="eyebrow on-ink">Stay informed</span>
+          <h2 style="margin-top: 20px;">The SAMA Indonesia<br />monthly briefing.</h2>
+          <p>One email per month. Market intelligence, event invites, new resources, and thinking from across the member network. No fluff — just useful.</p>
+        </div>
+        <div>
+          <form class="nl-form" onsubmit="event.preventDefault(); this.innerHTML = '<p style=\'color:var(--fire-glow);font-family:var(--font-mono);font-size:14px;\'>You\'re subscribed. Welcome to the network.</p>'">
+            <div>
+              <label style="color: var(--muted-on-ink); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 10px;">Work email *</label>
+              <input type="email" required placeholder="you@company.com" />
+            </div>
+            <div>
+              <label style="color: var(--muted-on-ink); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 10px;">I am a *</label>
+              <select required style="width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--line);border-radius:6px;color:var(--cream);font-family:var(--font-sans);font-size:16px;padding:16px 20px;">
+                <option value="" disabled selected>Select one</option>
+                <option>Brand marketer</option>
+                <option>Agency professional</option>
+                <option>Consultant / freelancer</option>
+                <option>Press / media</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Subscribe to the briefing →</button>
+            <p class="nl-note">No spam. Unsubscribe anytime. We share this list with no one.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CTA BAND                                                       -->
+  <!-- ============================================================ -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Have something worth publishing?</h2>
+      <p class="lede">SAMA Indonesia publishes thinking from member agencies and brand partners. Pitch an article, a case study, or a research collaboration.</p>
+      <div class="row">
+        <a href="contact.html" class="btn btn-primary">Submit a contribution →</a>
+        <a href="contact.html" class="btn btn-outline">Become a member</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="assets/tweaks.jsx"></script>
+  <script src="assets/site.js"></script>
+
+  <script>
+    (function () {
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('#content-grid .content-card');
+      const featured = document.querySelector('.featured-event');
+
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          btns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.dataset.filter;
+
+          if (featured) featured.style.display = (filter === 'all' || filter === 'event') ? '' : 'none';
+
+          cards.forEach(card => {
+            const match = filter === 'all' || card.dataset.type === filter;
+            card.style.display = match ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

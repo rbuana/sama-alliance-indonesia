@@ -17,8 +17,8 @@
           <li><a href="index.html" data-page="home">Home</a></li>
           <li><a href="about.html" data-page="about">About</a></li>
           <li><a href="members.html" data-page="members">Members</a></li>
-          <li><a href="index.html#capabilities" data-page="capabilities">Capabilities</a></li>
-          <li><a href="index.html#insights" data-page="insights">Insights</a></li>
+          <li><a href="capabilities.html" data-page="capabilities">Capabilities</a></li>
+          <li><a href="insights.html" data-page="insights">Insights</a></li>
         </ul>
         <div class="nav-right">
           <a href="contact.html" class="btn btn-primary btn-sm">Start a Conversation</a>
@@ -45,8 +45,8 @@
             <ul>
               <li><a href="about.html">About</a></li>
               <li><a href="members.html">Members</a></li>
-              <li><a href="index.html#capabilities">Capabilities</a></li>
-              <li><a href="index.html#insights">Insights &amp; Events</a></li>
+              <li><a href="capabilities.html">Capabilities</a></li>
+              <li><a href="insights.html">Insights &amp; Events</a></li>
             </ul>
           </div>
           <div>
