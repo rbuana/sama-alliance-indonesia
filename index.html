@@ -564,10 +564,12 @@
       .craft-grid, .whats-grid { grid-template-columns: 1fr; }
       .awards-row { grid-template-columns: repeat(2, 1fr); }
       .feature-card::before { display: none; }
-      /* Hide product UI mock on mobile — card text is self-contained */
-      .feature-card .cv-product { display: none; }
-      /* Collapse hero right panel */
-      .cv-split .cv-product { display: none; }
+      /* Product UI mock: restore on mobile, but remove floaters + aspect-ratio */
+      .feature-card .cv-product,
+      .cv-split .cv-product { display: block; aspect-ratio: unset; padding: 20px; overflow: visible; }
+      .cv-product .floater { display: none; }
+      .cv-ui-headline { font-size: 15px; }
+      .cv-ui-row { font-size: 11px; padding: 8px 10px; }
       /* Journey: stack donut above panels */
       .journey-layout { gap: 40px; }
       .journey-svg-wrap { max-width: 320px; }
