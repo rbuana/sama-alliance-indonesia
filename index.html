@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SAMA Alliance Indonesia — Borderless Marketing Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* ============ CVENT-STYLE LAYOUT OVERRIDES ============ */
+    body { background: #fcfbf7; }
+
+    /* Top announcement bar */
+    .anno {
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 13px;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .anno a { color: var(--fire-glow); margin-left: 8px; font-weight: 500; }
+    .anno a:hover { text-decoration: underline; }
+
+    /* Nav tweak for light body */
+    .nav { background: rgba(252, 251, 247, 0.94); color: var(--ink); border-bottom: 1px solid var(--line-dark); }
+    .nav .nav-links a { color: var(--ink); opacity: 0.78; }
+    .nav .nav-links a:hover { background: rgba(10,31,61,0.05); }
+    .nav .brand small { color: var(--muted-on-cream); }
+    .nav .nav-links a.active { color: var(--ink); }
+
+    /* HERO — Cvent split, light, bulleted */
+    .cv-hero { padding: clamp(60px, 8vw, 96px) 0 clamp(60px, 8vw, 80px); position: relative; overflow: hidden; }
+    .cv-hero .wrap { position: relative; }
+    .cv-split { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 6vw, 100px); align-items: center; }
+    .cv-split h1 {
+      font-size: clamp(44px, 5.6vw, 78px);
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      font-weight: 500;
+      margin: 0;
+    }
+    .cv-split h1 em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--fire); font-weight: 400; }
+    .cv-split .sub { font-size: clamp(18px, 1.6vw, 22px); margin: 24px 0 28px; color: var(--ink); font-weight: 500; }
+    .check-list { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 12px; }
+    .check-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 17px; color: var(--ink); }
+    .check-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--fire);
+      margin-top: 2px;
+      position: relative;
+      background-image: linear-gradient(135deg, var(--fire-glow), var(--fire));
+      box-shadow: 0 0 0 4px rgba(255, 71, 25, 0.1);
+    }
+    .check-list li {
+      position: relative;
+    }
+    .check-list li::after {
+      content: '✓';
+      position: absolute;
+      left: 6px;
+      top: 1px;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 22px;
+    }
+    .cv-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-link-cv { color: var(--fire); font-weight: 500; padding: 14px 0; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-link-cv::after { content: '→'; transition: transform 200ms; }
+    .btn-link-cv:hover::after { transform: translateX(4px); }
+
+    /* Hero product visual */
+    .cv-product {
+      position: relative;
+      aspect-ratio: 4/3.1;
+      background: linear-gradient(135deg, #eee7d4 0%, #f5e8d8 50%, #f0d8c5 100%);
+      border-radius: 14px;
+      padding: 28px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -30px rgba(10, 31, 61, 0.25);
+    }
+    .cv-product::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: var(--fire);
+      border-radius: 50%;
+      opacity: 0.18;
+    }
+    /* fake UI panels inside the hero product visual */
+    .cv-ui {
+      position: relative;
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 16px 40px -12px rgba(10, 31, 61, 0.18);
+      display: flex; flex-direction: column; gap: 12px;
+      height: 100%;
+    }
+    .cv-ui-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid #eee; font-family: var(--font-mono); font-size: 11px; color: var(--ink); }
+    .cv-ui-top .pill { background: var(--fire); color: white; padding: 4px 10px; border-radius: 100px; font-size: 10px; letter-spacing: 0.08em; }
+    .cv-ui-headline { font-family: var(--font-display); font-size: clamp(18px, 1.8vw, 24px); letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; }
+    .cv-ui-rows { display: flex; flex-direction: column; gap: 8px; }
+    .cv-ui-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #eee; border-radius: 8px; font-size: 12px; color: var(--ink); }
+    .cv-ui-row .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fire); flex-shrink: 0; }
+    .cv-ui-row .dot.g { background: #4caf50; }
+    .cv-ui-row .dot.b { background: #2196f3; }
+    .cv-ui-row .grow { flex: 1; }
+    .cv-ui-row .mono-sm { font-family: var(--font-mono); font-size: 10px; color: var(--muted-on-cream); }
+
+    .cv-product .floater {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 16px 40px -8px rgba(10, 31, 61, 0.22);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .cv-product .floater.tl { top: 22px; left: -14px; }
+    .cv-product .floater.br { bottom: 22px; right: -14px; }
+    .cv-product .floater .badge {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--fire); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 14px;
+    }
+
+    /* SUB ANNOUNCEMENT BANNER */
+    .sub-anno {
+      background: var(--cream-2);
+      padding: 18px 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--ink);
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .sub-anno strong { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em; }
+    .sub-anno a {
+      margin-left: 14px;
+      color: var(--fire);
+      font-weight: 500;
+      padding: 6px 14px;
+      border: 1px solid var(--fire);
+      border-radius: 4px;
+      font-size: 13px;
+      transition: all 160ms;
+    }
+    .sub-anno a:hover { background: var(--fire); color: white; }
+
+    /* FEATURE CARD */
+    .feature { padding: clamp(60px, 8vw, 100px) 0; }
+    .feature-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 4vw, 60px);
+      align-items: center;
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 18px;
+      padding: clamp(40px, 5vw, 72px);
+      overflow: hidden;
+      position: relative;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -120px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,71,25,0.45), transparent 70%);
+      pointer-events: none;
+    }
+    .feature-card .cv-product { background: linear-gradient(135deg, #182d52, #0a1f3d); }
+    .feature-card .cv-ui { background: rgba(255,255,255,0.04); border: 1px solid var(--line); color: var(--cream); }
+    .feature-card .cv-ui-top { color: var(--cream); border-bottom-color: var(--line); }
+    .feature-card .cv-ui-headline { color: var(--cream); }
+    .feature-card .cv-ui-row { border-color: var(--line); color: var(--cream); }
+
+    .feature-content { position: relative; }
+    .feature-eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--font-mono); font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--fire-glow);
+    }
+    .feature-eyebrow .logo-sq {
+      display: inline-block;
+      background: var(--fire);
+      color: white;
+      font-family: var(--font-display);
+      font-size: 14px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+    .feature-card h2 { font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.02em; line-height: 1.05; margin: 20px 0 18px; color: var(--cream); }
+    .feature-card p { font-size: 17px; line-height: 1.55; color: rgba(245,241,234,0.82); margin: 0 0 28px; }
+
+    /* STATS BAND (Cvent-style: 4 stats, no border, big numbers) */
+    .stats-band { padding: clamp(40px, 5vw, 80px) 0; text-align: center; }
+    .stats-band h2 { font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -0.02em; max-width: 24ch; margin: 0 auto 56px; }
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; }
+    .stat-cv .n {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 84px);
+      letter-spacing: -0.04em;
+      color: var(--fire);
+      line-height: 1;
+      font-weight: 500;
+    }
+    .stat-cv .l {
+      font-size: 14px;
+      color: var(--muted-on-cream);
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    /* LOGO WALL */
+    .logo-wall { padding: 40px 0 80px; }
+    .logo-wall h3 {
+      font-size: 18px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      text-align: center;
+      color: var(--muted-on-cream);
+      margin: 0 0 40px;
+      letter-spacing: 0;
+    }
+    .logo-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+    .logo-card {
+      height: 80px;
+      background: white;
+      border: 1px solid var(--line-dark);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      opacity: 0.85;
+      transition: opacity 160ms, transform 160ms;
+    }
+    .logo-card:hover { opacity: 1; transform: translateY(-2px); }
+
+    /* LIFECYCLE SECTION (Cvent's tabbed phases with screenshots) */
+    .lifecycle { padding: clamp(80px, 10vw, 140px) 0; background: white; }
+    .lc-head { text-align: center; max-width: 760px; margin: 0 auto 64px; }
+    .lc-head h2 { font-size: clamp(36px, 4.6vw, 60px); letter-spacing: -0.03em; line-height: 1.0; }
+    .lc-head p { font-size: 18px; color: var(--muted-on-cream); margin-top: 16px; }
+
+    .lc-tabs {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      padding-bottom: 0;
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .lc-tab {
+      padding: 16px 22px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-on-cream);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 160ms;
+      background: transparent;
+    }
+    .lc-tab.active { color: var(--fire); border-bottom-color: var(--fire); }
+    .lc-tab:hover:not(.active) { color: var(--ink); }
+
+    .lc-panel { display: none; }
+    .lc-panel.active { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(40px, 5vw, 72px); align-items: center; }
+    .lc-panel .copy h3 { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -0.02em; line-height: 1.05; }
+    .lc-panel .copy .lead { font-size: 17px; color: var(--muted-on-cream); line-height: 1.55; margin: 18px 0 28px; }
+    .lc-panel .copy ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+    .lc-panel .copy li {
+      display: flex; gap: 14px; align-items: flex-start;
+      font-size: 15px; color: var(--ink);
+      padding: 14px 16px; border: 1px solid var(--line-dark); border-radius: 8px;
+      transition: background 160ms;
+    }
+    .lc-panel .copy li:hover { background: var(--cream); }
+    .lc-panel .copy li .ix {
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fire);
+      letter-spacing: 0.1em;
+      width: 36px;
+    }
+    .lc-panel .copy li strong { display: block; margin-bottom: 2px; }
+    .lc-panel .copy li small { color: var(--muted-on-cream); font-size: 13px; }
+
+    .lc-visual {
+      aspect-ratio: 4/3.2;
+      background: linear-gradient(135deg, #ece6da, #d9d2c4);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* PRODUCT/CRAFT GRID (Cvent's product showcase) */
+    .craft-grid-section { padding: clamp(80px, 10vw, 120px) 0; background: var(--cream); }
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .craft-card {
+      background: white;
+      border: 1px solid var(--line-dark);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 200ms, box-shadow 200ms;
+    }
+    .craft-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -20px rgba(10,31,61,0.18); }
+    .craft-card .ci {
+      height: 200px;
+      background: linear-gradient(135deg, #f5e8d8, #ece1cd);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .craft-card .ci.ink { background: linear-gradient(135deg, #182d52, #0a1f3d); }
+    .craft-card .ci.fire { background: linear-gradient(135deg, #ff6b3d, #ff4719); }
+    .craft-card .ci .mini-ui {
+      background: white;
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 12px 30px -10px rgba(0,0,0,0.18);
+      display: flex; flex-direction: column; gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink);
+      max-width: 90%;
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
+    }
+    .craft-card .ci .mini-ui .b { height: 6px; background: var(--cream-2); border-radius: 3px; }
+    .craft-card .ci .mini-ui .b.fire { background: var(--fire); width: 60%; }
+    .craft-card .ci .mini-ui .b.short { width: 40%; }
+    .craft-card .ci .mini-ui .b.long { width: 80%; }
+    .craft-card .ci .corner-tag {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+    .craft-card .cb { padding: 24px 24px 28px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+    .craft-card .cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fire); }
+    .craft-card h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; }
+    .craft-card p { font-size: 14px; color: var(--muted-on-cream); margin: 0; line-height: 1.5; flex-grow: 1; }
+    .craft-card .link { color: var(--ink); font-weight: 500; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; margin-top: 8px; }
+    .craft-card .link::after { content: '→'; transition: transform 200ms; color: var(--fire); }
+    .craft-card:hover .link::after { transform: translateX(4px); }
+
+    /* AWARDS / REVIEWS */
+    .awards-bar { padding: 60px 0; background: white; border-top: 1px solid var(--line-dark); }
+    .awards-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .award-tile {
+      text-align: center;
+      padding: 24px;
+      border: 1px solid var(--line-dark);
+      border-radius: 12px;
+    }
+    .award-tile .stars { font-family: var(--font-mono); font-size: 16px; color: var(--fire); }
+    .award-tile .num { font-family: var(--font-display); font-size: 28px; letter-spacing: -0.02em; margin: 6px 0; }
+    .award-tile .src { font-family: var(--font-mono); font-size: 11px; color: var(--muted-on-cream); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* READY CTA BAND (Cvent-style with image) */
+    .ready { padding: 100px 0; background: var(--cream); }
+    .ready-card {
+      background: white;
+      border-radius: 16px;
+      padding: clamp(40px, 5vw, 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 4vw, 60px);
+      align-items: center;
+      border: 1px solid var(--line-dark);
+    }
+    .ready-card h2 { font-size: clamp(32px, 4vw, 52px); letter-spacing: -0.03em; line-height: 1.0; }
+    .ready-card p { margin: 18px 0 28px; font-size: 17px; color: var(--muted-on-cream); line-height: 1.55; }
+    .ready-card .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .ready-img {
+      aspect-ratio: 1.2/1;
+      background: linear-gradient(135deg, #ff6b3d, #c8290f);
+      border-radius: 12px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: flex-end;
+    }
+    .ready-img::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+    }
+    .ready-img-quote {
+      position: relative;
+      color: white;
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.2vw, 30px);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .ready-img-quote small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 16px;
+      opacity: 0.85;
+    }
+
+    /* WHAT'S NEW (3 columns) */
+    .whats { padding: 100px 0; background: white; }
+    .whats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+    .whats-card {
+      border: 1px solid var(--line-dark);
+      border-radius: 12px;
+      padding: 32px 28px;
+      display: flex; flex-direction: column;
+      gap: 14px;
+      min-height: 280px;
+      transition: background 160ms, transform 200ms;
+    }
+    .whats-card:hover { background: var(--cream); transform: translateY(-4px); }
+    .whats-card .cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fire); }
+    .whats-card h3 { font-size: 22px; letter-spacing: -0.02em; line-height: 1.15; }
+    .whats-card p { margin: 0; color: var(--muted-on-cream); font-size: 14px; line-height: 1.5; flex-grow: 1; }
+    .whats-card .meta { font-family: var(--font-mono); font-size: 11px; color: var(--muted-on-cream); padding-top: 14px; border-top: 1px solid var(--line-dark); margin-top: 8px; }
+    .whats-card .link { color: var(--ink); font-weight: 500; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; }
+    .whats-card .link::after { content: '→'; color: var(--fire); transition: transform 200ms; }
+    .whats-card:hover .link::after { transform: translateX(4px); }
+
+    /* RESOURCE CHIPS */
+    .res-chips { padding: 40px 0 100px; background: white; }
+    .res-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .res-chip {
+      padding: 12px 18px;
+      border: 1px solid var(--line-dark);
+      border-radius: 100px;
+      font-size: 14px;
+      color: var(--ink);
+      transition: all 160ms;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .res-chip:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .res-chip::after { content: '↗'; color: var(--muted-on-cream); }
+    .res-chip:hover::after { color: var(--cream); }
+
+    /* PLATFORM RECAP + FORM */
+    .platform { padding: 100px 0; background: var(--ink); color: var(--cream); }
+    .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+    .platform h2 { font-size: clamp(36px, 4.6vw, 60px); letter-spacing: -0.03em; line-height: 1.0; color: var(--cream); }
+    .platform .lede { color: rgba(245,241,234,0.78); margin: 24px 0 32px; }
+    .platform ul { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 14px; }
+    .platform li { display: flex; gap: 14px; align-items: center; font-size: 16px; }
+    .platform li::before {
+      content: '✓';
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--fire); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .lead-form-card {
+      background: var(--ink-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: clamp(28px, 3.5vw, 40px);
+    }
+    .lead-form-card h3 { font-size: 24px; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--cream); }
+    .lead-form-card .form-grid { gap: 18px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      .cv-split, .feature-card, .ready-card, .platform-grid, .lc-panel.active { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .logo-row { grid-template-columns: repeat(3, 1fr); }
+      .craft-grid, .whats-grid { grid-template-columns: 1fr; }
+      .awards-row { grid-template-columns: repeat(2, 1fr); }
+      .feature-card::before { display: none; }
+    }
+  </style>
+</head>
+<body data-page="home" data-screen-label="Home">
+
+<!-- TOP ANNOUNCEMENT -->
+<div class="anno">
+  <div class="wrap anno-inner">
+    See how the alliance assembles a team for your brief in 48 hours.
+    <a href="contact.html">Request a working session →</a>
+  </div>
+</div>
+
+<div id="site-nav"></div>
+
+<!-- ============ HERO (CVENT-STYLE SPLIT) ============ -->
+<header class="cv-hero" data-screen-label="Home / Hero">
+  <div class="wrap">
+    <div class="cv-split">
+      <div>
+        <h1>Get better<br />outcomes from<br />borderless <em>marketing</em></h1>
+        <p class="sub">Designed for human creativity. Built with Indonesia's best tech.</p>
+        <ul class="check-list">
+          <li>Find the right craft specialists, faster</li>
+          <li>Reach Indonesia's fragmented audiences</li>
+          <li>Track engagement and business impact</li>
+          <li>Prove revenue contribution to the CFO</li>
+        </ul>
+        <div class="cv-ctas">
+          <a href="members.html" class="btn btn-primary">Explore the alliance</a>
+          <a href="contact.html" class="btn btn-outline-ink">Request an intro</a>
+        </div>
+      </div>
+
+      <div class="cv-product" aria-hidden="true">
+        <div class="floater tl">
+          <span class="badge">A</span>
+          <div>
+            <div style="font-family: var(--font-sans); font-weight: 500; font-size: 12px;">Team assembled</div>
+            <div style="color: var(--muted-on-cream); font-size: 10px;">4 specialists · 48h</div>
+          </div>
+        </div>
+        <div class="floater br">
+          <span class="badge" style="background: #4caf50;">↑</span>
+          <div>
+            <div style="font-family: var(--font-sans); font-weight: 500; font-size: 12px;">+42% recall</div>
+            <div style="color: var(--muted-on-cream); font-size: 10px;">Q3 vs Q2</div>
+          </div>
+        </div>
+
+        <div class="cv-ui">
+          <div class="cv-ui-top">
+            <span>SAMA · BRIEF DESK</span>
+            <span class="pill">LIVE</span>
+          </div>
+          <div class="cv-ui-headline">Launch campaign — FMCG Indonesia</div>
+          <div class="cv-ui-rows">
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Ideoworks / Krona · Brand &amp; Creative Strategy</span><span class="mono-sm">STRATEGY</span></div>
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Naik Kreatif · Branding</span><span class="mono-sm">BRAND</span></div>
+            <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Omeoo · Social, Creative &amp; Video Production</span><span class="mono-sm">PRODUCTION</span></div>
+            <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Ivosights · Data Analytics</span><span class="mono-sm">DATA</span></div>
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">KIM Comm. · Launch PR</span><span class="mono-sm">EARNED</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SUB ANNOUNCEMENT -->
+<div class="sub-anno">
+  <strong>SAMA APAC 2026</strong> · Unlocking APAC's Potential 3 lands in Bali, March 2026.
+  <a href="#insights">Register now</a>
+</div>
+
+<!-- ============ FEATURE CARD (CVENT-IQ STYLE) ============ -->
+<section class="feature" data-screen-label="Home / Feature card">
+  <div class="wrap">
+    <div class="feature-card">
+      <div class="feature-content">
+        <span class="feature-eyebrow"><span class="logo-sq">SAMA<em style="font-style: italic; font-family: 'Instrument Serif', serif;">·</em>OS</span> ONE OPERATING SYSTEM</span>
+        <h2>One brief. One team.<br />One invoice.</h2>
+        <p>Brands used to pay an integration tax — five agencies, three contracts, two project managers, one mess. The SAMA operating system absorbs that complexity. You see one team. We handle everything behind the curtain.</p>
+        <a href="about.html" class="btn btn-primary">How the OS works →</a>
+      </div>
+
+      <div class="cv-product" aria-hidden="true">
+        <div class="cv-ui">
+          <div class="cv-ui-top">
+            <span>SAMA · ASSEMBLY</span>
+            <span class="pill">AUTO</span>
+          </div>
+          <div class="cv-ui-headline">Brief intake → team composed</div>
+          <div class="cv-ui-rows">
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Brand sub-vertical · FMCG · Bev.</span><span class="mono-sm">MATCH</span></div>
+            <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Cultural insight · Java youth</span><span class="mono-sm">MATCH</span></div>
+            <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Channels · TVC · TikTok · Search</span><span class="mono-sm">MATCH</span></div>
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Outcome · Aided awareness +40%</span><span class="mono-sm">TARGET</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS BAND ============ -->
+<section class="stats-band" data-screen-label="Home / Stats">
+  <div class="wrap">
+    <h2>Your single-source partner<br />for every brand challenge in Indonesia</h2>
+    <div class="stats-row">
+      <div class="stat-cv">
+        <div class="n">10</div>
+        <div class="l">Independent member agencies in Jakarta</div>
+      </div>
+      <div class="stat-cv">
+        <div class="n">800+</div>
+        <div class="l">Practitioners across creative, media, tech</div>
+      </div>
+      <div class="stat-cv">
+        <div class="n">17K+</div>
+        <div class="l">Islands within our home market</div>
+      </div>
+      <div class="stat-cv">
+        <div class="n">48h</div>
+        <div class="l">From brief intake to team formed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGO WALL ============ -->
+<section class="logo-wall" data-screen-label="Home / Trusted by">
+  <div class="wrap">
+    <h3>Trusted by ambitious brands building in Indonesia</h3>
+    <div class="logo-row">
+      <div class="logo-card">Tokopedia</div>
+      <div class="logo-card">Gojek</div>
+      <div class="logo-card">BCA</div>
+      <div class="logo-card">Telkomsel</div>
+      <div class="logo-card">Sinar Mas</div>
+      <div class="logo-card">Indofood</div>
+    </div>
+    <div class="logo-row" style="margin-top: 24px;">
+      <div class="logo-card">Unilever ID</div>
+      <div class="logo-card">Wardah</div>
+      <div class="logo-card">Astra</div>
+      <div class="logo-card">Mandiri</div>
+      <div class="logo-card">MRT Jakarta</div>
+      <div class="logo-card">Bluebird</div>
+    </div>
+    <p style="text-align: center; color: var(--muted-on-cream); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 32px;">
+      Illustrative — replace with actual client wall on launch
+    </p>
+  </div>
+</section>
+
+<!-- ============ LIFECYCLE (CVENT-STYLE TABS) ============ -->
+<section class="lifecycle" data-screen-label="Home / Lifecycle">
+  <div class="wrap">
+    <div class="lc-head">
+      <span class="eyebrow" style="margin: 0 auto;">How a brief moves through the alliance</span>
+      <h2 style="margin-top: 20px;">Your campaign lifecycle,<br />from brief to outcome.</h2>
+      <p>With shared tools, shared rituals, and a shared P&amp;L — work moves between studios like it's one building.</p>
+    </div>
+
+    <div class="lc-tabs" role="tablist">
+      <button class="lc-tab active" data-tab="intake">01 · Intake</button>
+      <button class="lc-tab" data-tab="assemble">02 · Assemble</button>
+      <button class="lc-tab" data-tab="execute">03 · Execute</button>
+      <button class="lc-tab" data-tab="prove">04 · Prove</button>
+    </div>
+
+    <div class="lc-panel active" data-panel="intake">
+      <div class="copy">
+        <h3>Single intake, single accountable lead.</h3>
+        <p class="lead">Your brief lands once at the alliance secretariat. Within 48 hours, a regional lead becomes your single contact — no re-briefing across five vendors.</p>
+        <ul>
+          <li><span class="ix">01</span><div><strong>Brief intake call</strong><small>Working session within 48 hours to align on business outcomes.</small></div></li>
+          <li><span class="ix">02</span><div><strong>Cultural &amp; market read</strong><small>Strategy lead sets the consumer truth before recommending tactics.</small></div></li>
+          <li><span class="ix">03</span><div><strong>Commercial framing</strong><small>One contract, one P&amp;L. No procurement gridlock across vendors.</small></div></li>
+        </ul>
+      </div>
+      <div class="lc-visual">
+        <div class="cv-ui">
+          <div class="cv-ui-top"><span>BRIEF DESK</span><span class="pill">48H</span></div>
+          <div class="cv-ui-headline">New brief · Consumer goods</div>
+          <div class="cv-ui-rows">
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Industry &amp; audience captured</span><span class="mono-sm">DONE</span></div>
+            <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Outcome metric agreed</span><span class="mono-sm">DONE</span></div>
+            <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Commercial framing signed</span><span class="mono-sm">DONE</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc-panel" data-panel="assemble">
+      <div class="copy">
+        <h3>The right specialists, not the next in queue.</h3>
+        <p class="lead">We pick from across the ten agencies based on craft fit, not on whose turn it is. The result: a team you would have hand-picked yourself.</p>
+        <ul>
+          <li><span class="ix">01</span><div><strong>Craft-based selection</strong><small>Best PR shop runs PR. Best gaming studio runs gaming. Every time.</small></div></li>
+          <li><span class="ix">02</span><div><strong>Founder-level senior team</strong><small>The people who pitch you are the people who do the work.</small></div></li>
+          <li><span class="ix">03</span><div><strong>Pre-aligned ways of working</strong><small>Shared toolkit, naming, status cadence — no re-onboarding tax.</small></div></li>
+        </ul>
+      </div>
+      <div class="lc-visual">
+        <div class="cv-ui">
+          <div class="cv-ui-top"><span>TEAM COMPOSER</span><span class="pill">AUTO</span></div>
+          <div class="cv-ui-headline">FMCG launch team · 4 specialists</div>
+          <div class="cv-ui-rows">
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Ideoworks · Brand lead</span><span class="mono-sm">CRAFT</span></div>
+            <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Seven Ads · Production</span><span class="mono-sm">CRAFT</span></div>
+            <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Meson Digital · Performance</span><span class="mono-sm">CRAFT</span></div>
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">KIM · Earned amplification</span><span class="mono-sm">CRAFT</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc-panel" data-panel="execute">
+      <div class="copy">
+        <h3>Borderless execution across every channel.</h3>
+        <p class="lead">From Sabang to Merauke, from TVC to TikTok — the team ships in lockstep. One status cadence, one Slack channel, one weekly stand-up across studios.</p>
+        <ul>
+          <li><span class="ix">01</span><div><strong>Single delivery ritual</strong><small>One weekly stand-up across all studios on the brief.</small></div></li>
+          <li><span class="ix">02</span><div><strong>Shared production pipeline</strong><small>Brand assets, content, code flow through a common drive and PM tool.</small></div></li>
+          <li><span class="ix">03</span><div><strong>Live channel orchestration</strong><small>Media, social, PR and tech moves coordinated in real time.</small></div></li>
+        </ul>
+      </div>
+      <div class="lc-visual">
+        <div class="cv-ui">
+          <div class="cv-ui-top"><span>CHANNEL ORCHESTRATOR</span><span class="pill">LIVE</span></div>
+          <div class="cv-ui-headline">Week 6 · 14 channels active</div>
+          <div class="cv-ui-rows">
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">TVC · live on Trans7, RCTI</span><span class="mono-sm">ON AIR</span></div>
+            <div class="cv-ui-row"><span class="dot g"></span><span class="grow">TikTok · 4 creators activated</span><span class="mono-sm">LIVE</span></div>
+            <div class="cv-ui-row"><span class="dot b"></span><span class="grow">Meta &amp; Search · scaling</span><span class="mono-sm">+18%</span></div>
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Earned media · 24 placements</span><span class="mono-sm">TIER 1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lc-panel" data-panel="prove">
+      <div class="copy">
+        <h3>Outcomes tied to your CFO's spreadsheet.</h3>
+        <p class="lead">We don't ship vanity decks. Quarterly business reviews show what we'd kill, what we'd scale, and how marketing moved the business.</p>
+        <ul>
+          <li><span class="ix">01</span><div><strong>Outcome-linked dashboards</strong><small>Brand lift, pipeline, revenue contribution — not just impressions.</small></div></li>
+          <li><span class="ix">02</span><div><strong>Cross-channel attribution</strong><small>Built and operated by Meson Digital + Omeoo in-house.</small></div></li>
+          <li><span class="ix">03</span><div><strong>Quarterly business review</strong><small>Honest reflection. What worked, what didn't, what changes next quarter.</small></div></li>
+        </ul>
+      </div>
+      <div class="lc-visual">
+        <div class="cv-ui">
+          <div class="cv-ui-top"><span>OUTCOMES BOARD</span><span class="pill">Q3</span></div>
+          <div class="cv-ui-headline">Business impact · launch campaign</div>
+          <div class="cv-ui-rows">
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Aided awareness · target +40%</span><span class="mono-sm">+44%</span></div>
+            <div class="cv-ui-row"><span class="dot g"></span><span class="grow">Trial sales · target 120K units</span><span class="mono-sm">138K</span></div>
+            <div class="cv-ui-row"><span class="dot b"></span><span class="grow">CPA · target IDR 28K</span><span class="mono-sm">IDR 22K</span></div>
+            <div class="cv-ui-row"><span class="dot"></span><span class="grow">Earned reach</span><span class="mono-sm">42M</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRAFT GRID (PRODUCT SHOWCASE) ============ -->
+<section class="craft-grid-section" id="capabilities" data-screen-label="Home / Capabilities">
+  <div class="wrap">
+    <div class="lc-head" style="margin-bottom: 0; text-align: left; max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end;">
+      <div>
+        <span class="eyebrow">What we do together</span>
+        <h2 style="margin-top: 20px; font-size: clamp(32px, 4vw, 52px);">A full marketing &amp;<br />technology stack — assembled per brief.</h2>
+      </div>
+      <p style="font-size: 17px; color: var(--muted-on-cream); margin: 0;">
+        Eight craft disciplines, ten specialist agencies. Pulled per brief, pre-aligned, pre-contracted.
+      </p>
+    </div>
+
+    <div class="craft-grid">
+      <article class="craft-card">
+        <div class="ci">
+          <span class="corner-tag">STRATEGY</span>
+          <div class="mini-ui">
+            <div class="b long"></div><div class="b fire"></div><div class="b short"></div>
+          </div>
+        </div>
+        <div class="cb">
+          <span class="cat">Brand &amp; Strategy</span>
+          <h3>Position to win with cultural intelligence</h3>
+          <p>Naming, positioning, brand architecture and consumer research grounded in Indonesian truth.</p>
+          <a href="members.html" class="link">Ideoworks · Krona · KIM</a>
+        </div>
+      </article>
+
+      <article class="craft-card">
+        <div class="ci ink">
+          <span class="corner-tag">CREATIVE</span>
+          <div class="mini-ui">
+            <div class="b fire"></div><div class="b long"></div><div class="b short"></div>
+          </div>
+        </div>
+        <div class="cb">
+          <span class="cat">Creative &amp; Content</span>
+          <h3>Big-idea campaigns and always-on social</h3>
+          <p>From flagship campaigns to weekly TikTok cadence — built for every Indonesian platform.</p>
+          <a href="members.html" class="link">Naik Kreatif · Ideoworks</a>
+        </div>
+      </article>
+
+      <article class="craft-card">
+        <div class="ci">
+          <span class="corner-tag">MEDIA</span>
+          <div class="mini-ui">
+            <div class="b long"></div><div class="b short"></div><div class="b fire"></div>
+          </div>
+        </div>
+        <div class="cb">
+          <span class="cat">Performance &amp; Media</span>
+          <h3>Paid media as a single optimized P&amp;L</h3>
+          <p>Paid social, search, programmatic, retail media — measured and reported as one.</p>
+          <a href="members.html" class="link">Meson Digital · ADX Asia</a>
+        </div>
+      </article>
+
+      <article class="craft-card">
+        <div class="ci fire">
+          <span class="corner-tag">EARNED</span>
+          <div class="mini-ui">
+            <div class="b"></div><div class="b fire"></div><div class="b long"></div>
+          </div>
+        </div>
+        <div class="cb">
+          <span class="cat">PR, Comms &amp; Influence</span>
+          <h3>Earned media wired into the cultural moment</h3>
+          <p>Earned, crisis, executive comms, and the creator economy — moving in real time.</p>
+          <a href="members.html" class="link">KIM Communication · Naik Kreatif</a>
+        </div>
+      </article>
+
+      <article class="craft-card">
+        <div class="ci ink">
+          <span class="corner-tag">TECH</span>
+          <div class="mini-ui">
+            <div class="b long"></div><div class="b fire"></div><div class="b short"></div>
+          </div>
+        </div>
+        <div class="cb">
+          <span class="cat">Technology &amp; Product</span>
+          <h3>Engineering that ships, not slideware</h3>
+          <p>Web, mobile, e-commerce, AI-powered tooling and MarTech stack design.</p>
+          <a href="members.html" class="link">Omeoo · Meson Digital</a>
+        </div>
+      </article>
+
+      <article class="craft-card">
+        <div class="ci">
+          <span class="corner-tag">DATA + CX</span>
+          <div class="mini-ui">
+            <div class="b fire"></div><div class="b short"></div><div class="b long"></div>
+          </div>
+        </div>
+        <div class="cb">
+          <span class="cat">Data &amp; Customer Experience</span>
+          <h3>Hear, decide, respond — at speed</h3>
+          <p>CDP, social listening, journey design, contact-center transformation.</p>
+          <a href="members.html" class="link">Ivosights · Omeoo</a>
+        </div>
+      </article>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="members.html" class="btn btn-outline-ink">Explore all capabilities →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AWARDS / REVIEWS ============ -->
+<section class="awards-bar" data-screen-label="Home / Awards">
+  <div class="wrap">
+    <div class="awards-row">
+      <div class="award-tile">
+        <div class="stars">★★★★★</div>
+        <div class="num">4.9 / 5</div>
+        <div class="src">Brand satisfaction · 2025</div>
+      </div>
+      <div class="award-tile">
+        <div class="stars">✦</div>
+        <div class="num">Tier 1</div>
+        <div class="src">Independent network · APAC</div>
+      </div>
+      <div class="award-tile">
+        <div class="stars">▲</div>
+        <div class="num">2× growth</div>
+        <div class="src">Member roster · 2024–25</div>
+      </div>
+      <div class="award-tile">
+        <div class="stars">∞</div>
+        <div class="num">7 chapters</div>
+        <div class="src">Cross-APAC alliance</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ READY CTA ============ -->
+<section class="ready" data-screen-label="Home / Ready CTA">
+  <div class="wrap">
+    <div class="ready-card">
+      <div>
+        <span class="eyebrow">Ready to see how it works?</span>
+        <h2 style="margin-top: 20px;">Brief us. Get a proposed team in 48 hours.</h2>
+        <p>Drop your business challenge — not a finished RFP. A regional lead will respond with a proposed team composition and a working-session date.</p>
+        <div class="ctas">
+          <a href="contact.html" class="btn btn-primary">Brief the alliance →</a>
+          <a href="members.html" class="btn btn-outline-ink">Tour the members</a>
+        </div>
+      </div>
+      <div class="ready-img">
+        <div class="ready-img-quote">
+          "We replaced four agencies with one alliance. Same depth, half the meetings."
+          <small>— Hypothetical CMO, regional FMCG</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT'S NEW ============ -->
+<section class="whats" id="insights" data-screen-label="Home / What's new">
+  <div class="wrap">
+    <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px;">
+      <div>
+        <span class="eyebrow">What's new at the alliance</span>
+        <h2 style="margin-top: 20px; font-size: clamp(32px, 4vw, 52px);">Latest insights &amp; events.</h2>
+      </div>
+      <a href="#" class="btn btn-outline-ink">View all →</a>
+    </div>
+
+    <div class="whats-grid">
+      <article class="whats-card">
+        <span class="cat">SAMA APAC · BALI 2026</span>
+        <h3>Learn how borderless campaigns get built — at SAMA APAC 2026</h3>
+        <p>March 12–14, 2026 · Bali. Three days of working sessions across SAMA's seven national chapters.</p>
+        <a href="#" class="link">Register now</a>
+        <span class="meta">Event · Registration open</span>
+      </article>
+      <article class="whats-card">
+        <span class="cat">CERTIFICATION</span>
+        <h3>Grow your craft and certify your SAMA expertise</h3>
+        <p>Quarterly cross-agency certification programs. Free for member-agency practitioners.</p>
+        <a href="#" class="link">Learn more</a>
+        <span class="meta">Education · Year-round</span>
+      </article>
+      <article class="whats-card">
+        <span class="cat">NEW RESOURCE</span>
+        <h3>Marketing in Indonesia 2026: the alliance trends report</h3>
+        <p>Inside: the death of the network agency, the rise of borderless teams, and what changes for CMOs.</p>
+        <a href="#" class="link">Download the eBook</a>
+        <span class="meta">Report · January 2026</span>
+      </article>
+    </div>
+
+    <div style="margin-top: 56px;">
+      <div class="res-row">
+        <a href="#" class="res-chip">2026 marketing trends</a>
+        <a href="#" class="res-chip">AI in Indonesian campaigns</a>
+        <a href="#" class="res-chip">Agency model guide</a>
+        <a href="#" class="res-chip">How to brief an alliance</a>
+        <a href="#" class="res-chip">APAC market entry playbook</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATFORM RECAP + LEAD FORM ============ -->
+<section class="platform" data-screen-label="Home / Platform recap + form">
+  <div class="wrap">
+    <div class="platform-grid">
+      <div>
+        <span class="eyebrow on-ink">A complete platform for every brand brief</span>
+        <h2 style="margin-top: 20px;">Borderless<br />marketing,<br />wired together.</h2>
+        <p class="lede">
+          Maximize the impact of every brand initiative in Indonesia with the alliance's integrated operating model.
+        </p>
+        <p style="color: rgba(245,241,234,0.78); margin-bottom: 24px;">Request a working session to see how you can:</p>
+        <ul>
+          <li>Plan and ship campaigns across every Indonesian channel</li>
+          <li>Manage one team, one P&amp;L, one accountable lead</li>
+          <li>Engage Indonesia's most-watched audiences with real cultural truth</li>
+          <li>Measure and prove business outcomes — not impressions</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Try a working session — free →</a>
+      </div>
+
+      <div class="lead-form-card">
+        <h3>See how the alliance assembles around your brief.</h3>
+        <form onsubmit="event.preventDefault(); alert('Inquiry sent — a regional lead will respond within 48 hours.');">
+          <div class="form-grid">
+            <div><label>First name *</label><input type="text" required /></div>
+            <div><label>Last name *</label><input type="text" required /></div>
+            <div class="full"><label>Work email *</label><input type="email" required /></div>
+            <div><label>Organization *</label><input type="text" required /></div>
+            <div><label>Role *</label><input type="text" required /></div>
+            <div class="full">
+              <label>Inquiry type *</label>
+              <select required>
+                <option>I'm a brand looking for an agency partner</option>
+                <option>I'm an agency interested in membership</option>
+                <option>Partnership / press / other</option>
+              </select>
+            </div>
+            <div class="full">
+              <label>Tell us what brings you here</label>
+              <textarea rows="3" placeholder="A short description of your brief, audience, or interest."></textarea>
+            </div>
+          </div>
+          <div class="legal" style="margin-top: 20px; display: flex; gap: 10px; align-items: flex-start; font-size: 12px; color: var(--muted-on-ink); line-height: 1.5;">
+            <input type="checkbox" required style="margin-top: 4px; accent-color: var(--fire);" />
+            <span>I agree to be contacted by SAMA Alliance Indonesia about this inquiry, per the privacy policy.</span>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top: 24px; width: 100%; justify-content: center;">Send inquiry →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+<script type="text/babel" src="assets/tweaks.jsx"></script>
+<script src="assets/site.js"></script>
+
+<script>
+  // Lifecycle tabs
+  (function () {
+    const tabs = document.querySelectorAll('.lc-tab');
+    const panels = document.querySelectorAll('.lc-panel');
+    tabs.forEach(t => t.addEventListener('click', () => {
+      const target = t.dataset.tab;
+      tabs.forEach(x => x.classList.toggle('active', x === t));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
+    }));
+  })();
+</script>
+</body>
+</html>
