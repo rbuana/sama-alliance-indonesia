@@ -111,6 +111,25 @@
     document.querySelectorAll('.nav-links a').forEach(a => {
       if ((a.dataset.page || '') === CURRENT) a.classList.add('active');
     });
+
+    // Fade in
+    requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+
+    // Fade out on internal navigation, then follow href
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || a.target === '_blank' || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('#')) return;
+      e.preventDefault();
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = href; }, 260);
+    });
+
+    // Restore opacity when navigating back/forward (bfcache)
+    window.addEventListener('pageshow', e => {
+      if (e.persisted) document.body.style.opacity = '1';
+    });
   }
 
   if (document.readyState === 'loading') {
