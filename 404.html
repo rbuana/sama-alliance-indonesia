@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 — Page Not Found · SAMA Alliance Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* 404 page — full viewport, ink body */
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      min-height: 100vh;
+    }
+
+    .four-oh-four {
+      min-height: calc(100vh - 72px - 72px); /* subtract nav + footer */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(60px, 8vw, 100px) 0;
+    }
+
+    .four-oh-four .inner {
+      text-align: center;
+      max-width: 700px;
+      padding: 0 clamp(20px, 4vw, 56px);
+    }
+
+    .four-oh-four .num-404 {
+      font-family: var(--font-display);
+      font-size: clamp(120px, 20vw, 200px);
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+      color: var(--fire);
+      margin-bottom: 32px;
+      display: block;
+      /* subtle text shadow for glow */
+      text-shadow:
+        0 0 80px rgba(255, 71, 25, 0.5),
+        0 0 200px rgba(255, 71, 25, 0.2);
+    }
+
+    .four-oh-four h2 {
+      font-size: clamp(24px, 3.5vw, 38px);
+      color: var(--cream);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .four-oh-four .sub {
+      font-size: 17px;
+      color: var(--muted-on-ink);
+      line-height: 1.6;
+      max-width: 48ch;
+      margin: 0 auto 48px;
+    }
+
+    .four-oh-four .divider-line {
+      width: 48px;
+      height: 1px;
+      background: var(--fire);
+      margin: 0 auto 48px;
+    }
+
+    /* Recommended links grid */
+    .link-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .link-card {
+      background: rgba(245, 241, 234, 0.05);
+      border: 1px solid rgba(245, 241, 234, 0.1);
+      border-radius: 6px;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--cream);
+      text-decoration: none;
+      transition: background 180ms, border-color 180ms, transform 180ms;
+    }
+    .link-card:hover {
+      background: rgba(245, 241, 234, 0.09);
+      border-color: var(--fire);
+      transform: translateY(-2px);
+      color: var(--cream);
+    }
+    .link-card .lc-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .link-card .lc-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-on-ink);
+      margin-top: 4px;
+    }
+    .link-card .lc-arrow {
+      color: var(--fire-glow);
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 200ms;
+    }
+    .link-card:hover .lc-arrow { transform: translateX(3px); }
+
+    .four-oh-four .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--fire);
+      color: var(--cream);
+      padding: 16px 28px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 160ms, transform 160ms;
+    }
+    .four-oh-four .home-btn:hover {
+      background: var(--fire-glow);
+      transform: translateY(-2px);
+    }
+
+    /* Background radial glow for atmosphere */
+    .four-oh-four-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(600px 400px at 30% 20%, rgba(255, 71, 25, 0.08), transparent 60%),
+        radial-gradient(500px 300px at 80% 80%, rgba(255, 71, 25, 0.05), transparent 60%);
+      z-index: 0;
+    }
+    .four-oh-four { position: relative; z-index: 1; }
+
+    @media (max-width: 600px) {
+      .link-grid { grid-template-columns: 1fr; }
+      .four-oh-four .num-404 { font-size: clamp(100px, 25vw, 140px); }
+    }
+  </style>
+</head>
+<body data-page="404">
+
+  <div id="site-nav"></div>
+
+  <!-- Background atmosphere -->
+  <div class="four-oh-four-bg"></div>
+
+  <!-- Main 404 content -->
+  <div class="four-oh-four">
+    <div class="inner">
+
+      <span class="num-404">404</span>
+
+      <h2>This page got lost between studios.</h2>
+
+      <p class="sub">It happens. Even the best-coordinated alliances lose a brief sometimes. Here are some places to start:</p>
+
+      <div class="divider-line"></div>
+
+      <div class="link-grid">
+        <a href="index.html" class="link-card">
+          <div>
+            <div class="lc-title">Homepage</div>
+            <div class="lc-sub">Start here</div>
+          </div>
+          <span class="lc-arrow">→</span>
+        </a>
+        <a href="about.html" class="link-card">
+          <div>
+            <div class="lc-title">About the Alliance</div>
+            <div class="lc-sub">Who we are</div>
+          </div>
+          <span class="lc-arrow">→</span>
+        </a>
+        <a href="members.html" class="link-card">
+          <div>
+            <div class="lc-title">Meet the Members</div>
+            <div class="lc-sub">10 agencies</div>
+          </div>
+          <span class="lc-arrow">→</span>
+        </a>
+        <a href="index.html#capabilities" class="link-card">
+          <div>
+            <div class="lc-title">Our Capabilities</div>
+            <div class="lc-sub">What we do</div>
+          </div>
+          <span class="lc-arrow">→</span>
+        </a>
+        <a href="contact.html" class="link-card">
+          <div>
+            <div class="lc-title">Brief the Alliance</div>
+            <div class="lc-sub">Start a project</div>
+          </div>
+          <span class="lc-arrow">→</span>
+        </a>
+        <a href="contact.html" class="link-card">
+          <div>
+            <div class="lc-title">Contact Us</div>
+            <div class="lc-sub">Get in touch</div>
+          </div>
+          <span class="lc-arrow">→</span>
+        </a>
+      </div>
+
+      <a href="index.html" class="home-btn">Back to homepage →</a>
+
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+
+  <!-- React + Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="assets/tweaks.jsx"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

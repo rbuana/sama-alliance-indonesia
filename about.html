@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — SAMA Alliance Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* ---- About page specific ---- */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 56px;
+      border-top: 1px solid var(--line-dark);
+      border-left: 1px solid var(--line-dark);
+    }
+    .principle-item {
+      padding: 32px 28px;
+      border-right: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: background 180ms;
+    }
+    .principle-item:hover { background: var(--cream-2); }
+    .principle-item .pnum {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fire);
+      letter-spacing: 0.12em;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+    .principle-item h4 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .principle-item p {
+      font-size: 14px;
+      color: var(--muted-on-cream);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .footprint-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 48px;
+      border-top: 1px solid var(--line-dark);
+      border-left: 1px solid var(--line-dark);
+    }
+    .footprint-grid .country-tile {
+      padding: 28px 24px;
+      border-right: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      background: var(--cream-2);
+      transition: background 180ms;
+    }
+    .footprint-grid .country-tile:hover { background: var(--cream); }
+    .footprint-grid .country-tile .cname {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .footprint-grid .country-tile .cdesc {
+      font-size: 13px;
+      color: var(--muted-on-cream);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .footprint-grid .country-tile .cflag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 12px;
+    }
+
+    .pillars-ink {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      margin-top: 56px;
+      border: 1px solid var(--line);
+    }
+    .pillar-ink {
+      background: var(--ink-2);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 340px;
+      transition: background 200ms;
+    }
+    .pillar-ink:hover { background: var(--ink); }
+    .pillar-ink .num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--fire-glow);
+      letter-spacing: 0.12em;
+    }
+    .pillar-ink h3 { font-size: 22px; line-height: 1.1; color: var(--cream); }
+    .pillar-ink p { font-size: 14px; color: var(--muted-on-ink); margin: 0; line-height: 1.6; }
+    .pillar-ink .glyph {
+      margin-top: auto;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      border-radius: 50%;
+      color: var(--fire-glow);
+    }
+
+    .stats-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 48px 0 0;
+      border-top: 1px solid var(--line-dark);
+    }
+    .stats-4 .stat-item {
+      padding: 36px 28px;
+      border-right: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .stats-4 .stat-item:nth-child(4n) { border-right: none; }
+    .stats-4 .stat-item .n {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 4.5vw, 60px);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .stats-4 .stat-item .n .accent { color: var(--fire); }
+    .stats-4 .stat-item .l {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-on-cream);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 980px) {
+      .pillars-ink { grid-template-columns: repeat(2, 1fr); }
+      .principles-grid { grid-template-columns: 1fr; }
+      .footprint-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-4 { grid-template-columns: repeat(2, 1fr); }
+      .stats-4 .stat-item:nth-child(2n) { border-right: none; }
+      .stats-4 .stat-item:nth-child(4n) { border-right: 1px solid var(--line-dark); }
+    }
+    @media (max-width: 600px) {
+      .pillars-ink { grid-template-columns: 1fr; }
+      .footprint-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="about">
+
+  <div id="site-nav"></div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE HEADER                                                    -->
+  <!-- ============================================================ -->
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow on-ink">Strategic Asia Marketing Alliance — Indonesia Chapter</span>
+      <h1>We exist to make Indonesia's independent agencies greater than the sum of their parts.</h1>
+      <p class="lede">SAMA unites the boldest independent marketing and technology agencies in Indonesia to deliver borderless campaigns that no single agency could ship alone.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- MISSION / THESIS                                              -->
+  <!-- ============================================================ -->
+  <section class="section-cream">
+    <div class="wrap">
+      <div class="two-col">
+        <div>
+          <span class="eyebrow">Our Thesis</span>
+          <h2 style="font-size: clamp(32px, 4vw, 52px); margin-top: 20px;">Why we built the alliance.</h2>
+        </div>
+        <div class="body">
+          <p>The network agency model was designed for a world that no longer exists. It assumes scale confers advantage — that rolling 40 markets into one P&amp;L produces insight you can't get from a local team. In Indonesia, the opposite is true. Local knowledge, cultural speed, and founder-level attention are the only things that move modern consumers. The networks charge a premium for infrastructure brands don't need and bill for middlemen who've never visited a Jakarta pasar.</p>
+          <p>Borderless collaboration doesn't require a holding company. It requires trust, shared process, and aligned incentives. SAMA was built on the principle that the ten best independent specialists in Indonesia — pre-aligned, pre-contracted, working from a shared playbook — will always out-execute a legacy network on speed, quality, and cultural precision. One intake brief. One commercial structure. Full specialist depth on every channel.</p>
+          <p>Independent agencies are simply better for Indonesian brands. Founders answer briefs. Senior talent stays on accounts. Decisions are made in the room, not escalated to regional offices in Singapore. When a brand briefs SAMA, they get the people who built the agency — not the people who were hired to service accounts the founders won three years ago. That's the SAMA guarantee, and it's the reason every brief we take gets better results than the brands expected.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOUR PILLARS                                                  -->
+  <!-- ============================================================ -->
+  <section class="section-ink">
+    <div class="wrap">
+      <span class="eyebrow on-ink">Our operating principles</span>
+      <h2 style="font-size: clamp(36px, 4.4vw, 60px); margin-top: 20px; max-width: 18ch;">Four pillars that govern every brief.</h2>
+
+      <div class="pillars-ink">
+        <div class="pillar-ink">
+          <span class="num">01</span>
+          <h3>Cultural Intelligence</h3>
+          <p>We start every brief with Indonesian consumer truth, not a global playbook. Every strategy is rooted in how people in Indonesia actually live, buy, and share — not how a London or New York strategist thinks they should.</p>
+          <div class="glyph">◎</div>
+        </div>
+        <div class="pillar-ink">
+          <span class="num">02</span>
+          <h3>Borderless Collaboration</h3>
+          <p>Ten agencies. One team. Pre-aligned, pre-contracted, ready to move. When a brief arrives, the right specialists are already in the room. No re-pitching. No agency politics. Just the best people, assembled for your specific challenge.</p>
+          <div class="glyph">⊕</div>
+        </div>
+        <div class="pillar-ink">
+          <span class="num">03</span>
+          <h3>Seamless Execution</h3>
+          <p>Shared tools, shared rituals, shared P&amp;L. Work moves between studios like one building. Brand assets, briefs, approvals, and deliverables live in a single ecosystem — transparent to the client at every stage.</p>
+          <div class="glyph">⟳</div>
+        </div>
+        <div class="pillar-ink">
+          <span class="num">04</span>
+          <h3>Results First</h3>
+          <p>We measure what your CFO cares about. Not impressions. Revenue contribution. Every campaign ships with outcome metrics agreed upfront — and every QBR is honest about what worked, what didn't, and why.</p>
+          <div class="glyph">↑</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- OPERATING PRINCIPLES                                          -->
+  <!-- ============================================================ -->
+  <section style="background: #fff; color: var(--ink); padding: clamp(80px, 10vw, 140px) 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">How we work</span>
+          <h2 style="margin-top: 20px;">Eight rules we never break.</h2>
+        </div>
+        <p class="lede" style="color: var(--muted-on-cream);">These aren't aspirational values on a wall. They're operational commitments encoded into every contract, every kick-off, and every invoice we issue.</p>
+      </div>
+
+      <div class="principles-grid">
+        <div class="principle-item">
+          <span class="pnum">01</span>
+          <div>
+            <h4>No re-briefing tax</h4>
+            <p>One intake, always. A brief given to SAMA is a brief given to the whole alliance. No agency asks you to re-explain the problem.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">02</span>
+          <div>
+            <h4>Craft fit over rotation</h4>
+            <p>Best agency for the job, every time. Specialists are selected by capability match, not whose turn it is on the roster.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">03</span>
+          <div>
+            <h4>Founder-level senior teams</h4>
+            <p>The people who pitch are the people who deliver. SAMA mandates founder or C-suite involvement on every active brief.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">04</span>
+          <div>
+            <h4>One contract, one P&amp;L</h4>
+            <p>No procurement gridlock. You sign one agreement with the alliance. We handle inter-agency coordination, contracts, and payment internally.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">05</span>
+          <div>
+            <h4>Shared production pipeline</h4>
+            <p>One drive, one PM tool, full brand visibility. You always know where your work is, who's holding it, and when it ships.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">06</span>
+          <div>
+            <h4>Outcome-linked reporting</h4>
+            <p>Brand lift, pipeline contribution, revenue — not just reach and impressions. Every report starts with the metric that matters to your business.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">07</span>
+          <div>
+            <h4>Honest QBRs</h4>
+            <p>We tell you what didn't work and why. Quarterly reviews are a space for truth, not a re-sell. If something failed, we say so and propose a fix.</p>
+          </div>
+        </div>
+        <div class="principle-item">
+          <span class="pnum">08</span>
+          <div>
+            <h4>Built to grow with you</h4>
+            <p>Same team compounds knowledge across briefs. The longer you work with SAMA, the sharper our understanding of your brand, category, and consumers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- REGIONAL FOOTPRINT                                            -->
+  <!-- ============================================================ -->
+  <section class="section-cream-2">
+    <div class="wrap">
+      <span class="eyebrow">The alliance</span>
+      <div class="section-head" style="margin-top: 20px;">
+        <h2>Seven chapters. One strategic platform.</h2>
+        <p class="lede" style="color: var(--muted-on-cream);">A single brief can activate the full SAMA network across Southeast Asia and Hong Kong — one contract, one point of contact, seven markets.</p>
+      </div>
+
+      <div class="stats-4">
+        <div class="stat-item">
+          <div class="n">7<span class="accent">+</span></div>
+          <div class="l">APAC Chapters</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">10</div>
+          <div class="l">Member Agencies (Indonesia)</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">800<span class="accent">+</span></div>
+          <div class="l">Practitioners in-network</div>
+        </div>
+        <div class="stat-item">
+          <div class="n">7</div>
+          <div class="l">Markets from one brief</div>
+        </div>
+      </div>
+
+      <div class="footprint-grid" style="margin-top: 48px;">
+        <div class="country-tile">
+          <div class="cflag">Chapter 01 · HQ</div>
+          <div class="cname">Indonesia</div>
+          <p class="cdesc">The founding chapter. Ten member agencies covering every major discipline in the world's fourth-largest digital economy.</p>
+        </div>
+        <div class="country-tile">
+          <div class="cflag">Chapter 02</div>
+          <div class="cname">Malaysia</div>
+          <p class="cdesc">Deep Bahasa and English bilingual capability, with a strong foothold in FMCG, finance, and government-adjacent brands.</p>
+        </div>
+        <div class="country-tile">
+          <div class="cflag">Chapter 03</div>
+          <div class="cname">Singapore</div>
+          <p class="cdesc">Regional hub for MNC briefs requiring Singapore as a gateway market for Southeast Asian roll-outs.</p>
+        </div>
+        <div class="country-tile">
+          <div class="cflag">Chapter 04</div>
+          <div class="cname">Thailand</div>
+          <p class="cdesc">Thai language creative and digital, with particular strength in beauty, retail, and entertainment verticals.</p>
+        </div>
+        <div class="country-tile">
+          <div class="cflag">Chapter 05</div>
+          <div class="cname">Vietnam</div>
+          <p class="cdesc">A high-growth chapter serving Vietnam's rapidly digitizing consumer economy, especially in e-commerce and tech.</p>
+        </div>
+        <div class="country-tile">
+          <div class="cflag">Chapter 06</div>
+          <div class="cname">Hong Kong</div>
+          <p class="cdesc">Gateway to Greater China briefs, with expertise in luxury, finance, and cross-border campaign execution.</p>
+        </div>
+        <div class="country-tile">
+          <div class="cflag">Chapter 07</div>
+          <div class="cname">Philippines</div>
+          <p class="cdesc">English-native market with powerful social media reach and a sophisticated influencer and entertainment-led agency ecosystem.</p>
+        </div>
+        <div class="country-tile" style="background: var(--ink); color: var(--cream);">
+          <div class="cflag" style="color: var(--fire-glow);">Coming 2026</div>
+          <div class="cname" style="color: var(--cream);">Expanding</div>
+          <p class="cdesc" style="color: var(--muted-on-ink);">New chapters in development across the broader APAC region. Brief us — we'll tell you what we can already cover.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CTA BAND                                                       -->
+  <!-- ============================================================ -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Ready to brief the alliance?</h2>
+      <div class="row">
+        <p style="font-size: 18px; max-width: 52ch; margin: 0; opacity: 0.9; line-height: 1.5;">Drop your business challenge. A regional lead will respond with a proposed team and a working-session date within 48 hours.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-outline">Brief the alliance →</a>
+          <a href="members.html" class="btn btn-outline">Meet the members</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <!-- React + Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="assets/tweaks.jsx"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

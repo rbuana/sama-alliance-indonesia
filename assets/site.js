@@ -72,6 +72,29 @@
         </div>
       </div>
     </footer>
+    <div class="footer-credit">
+      <div class="wrap">
+        <span>Proudly made with ♥ by <a href="https://www.omeoo.com" target="_blank" rel="noopener">Omeoo Creative</a> — Where creativity meets strategy.</span>
+      </div>
+    </div>
+    <style>
+      .footer-credit {
+        background: #030b17;
+        border-top: 1px solid rgba(245,241,234,0.06);
+        padding: 14px 0;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: rgba(245,241,234,0.45);
+      }
+      .footer-credit a {
+        color: var(--fire-glow);
+        opacity: 1;
+        font-weight: 500;
+      }
+      .footer-credit a:hover { text-decoration: underline; }
+    </style>
   `;
 
   function inject() {

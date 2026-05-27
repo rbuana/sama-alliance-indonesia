@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Members — SAMA Alliance Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Serif+Display:ital@0;1&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* ---- Members page specific ---- */
+    .member-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .member-card .site-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fire);
+      transition: color 160ms;
+      margin-top: 8px;
+    }
+    .member-card .site-link:hover { color: var(--ink); }
+
+    .member-card .logo-circle {
+      background: var(--ink);
+      color: var(--fire-glow);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .scenarios {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .scenario-card {
+      background: var(--ink-2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background 200ms, border-color 200ms;
+    }
+    .scenario-card:hover { background: var(--ink); border-color: var(--fire); }
+    .scenario-card .sc-type {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fire-glow);
+    }
+    .scenario-card h3 { font-size: 22px; color: var(--cream); }
+    .scenario-card .sc-members {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .scenario-card .sc-member {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .scenario-card .sc-member .sc-agency {
+      font-family: var(--font-display);
+      font-size: 15px;
+      color: var(--cream);
+      font-weight: 500;
+    }
+    .scenario-card .sc-member .sc-role {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted-on-ink);
+    }
+    .scenario-card .sc-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--fire);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 980px) {
+      .scenarios { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-page="members">
+
+  <div id="site-nav"></div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE HEADER                                                    -->
+  <!-- ============================================================ -->
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow on-ink">Indonesia Chapter</span>
+      <h1>Ten independent agencies. One borderless team.</h1>
+      <p class="lede">Each member is the best at what they do in their category. Together, they cover every discipline a modern Indonesian brand brief demands.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FILTER BAR + MEMBER LIST                                       -->
+  <!-- ============================================================ -->
+  <section class="section-cream">
+    <div class="wrap">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <span class="eyebrow">Indonesia Chapter Members</span>
+          <h2 style="font-size: clamp(32px, 4vw, 52px); margin-top: 16px;">The alliance roster.</h2>
+        </div>
+        <p style="font-size: 15px; color: var(--muted-on-cream); max-width: 40ch; line-height: 1.55; margin: 0; align-self: flex-end;">Filter by capability to find the right specialist, or view the full roster to understand the breadth of the alliance.</p>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="strategy">Strategy</button>
+        <button class="filter-chip" data-filter="creative">Creative</button>
+        <button class="filter-chip" data-filter="performance">Performance</button>
+        <button class="filter-chip" data-filter="pr">PR &amp; Comms</button>
+        <button class="filter-chip" data-filter="tech">Tech &amp; Product</button>
+        <button class="filter-chip" data-filter="data">Data &amp; CX</button>
+        <button class="filter-chip" data-filter="influencer">Influencer</button>
+        <button class="filter-chip" data-filter="gaming">Gaming</button>
+      </div>
+
+      <!-- Member list -->
+      <div class="member-list" id="member-list">
+
+        <!-- 1. Omeoo Creative -->
+        <div class="member-card" data-caps="creative social video tech performance">
+          <div class="ident">
+            <div class="logo-circle">OC</div>
+            <div>
+              <div class="name">Omeoo Creative</div>
+              <div class="meta">omeoo.com · Est. 2009</div>
+              <a href="https://www.omeoo.com" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Full-service creative and digital agency building emotional brand connections through strategy, content, and technology. From TikTok mega-campaigns to full-stack web builds.</div>
+          <div class="caps">
+            <span class="cap-chip">CREATIVE</span>
+            <span class="cap-chip">SOCIAL</span>
+            <span class="cap-chip">VIDEO</span>
+            <span class="cap-chip">TECH</span>
+            <span class="cap-chip">PERFORMANCE</span>
+          </div>
+        </div>
+
+        <!-- 2. Ideoworks -->
+        <div class="member-card" data-caps="strategy branding creative">
+          <div class="ident">
+            <div class="logo-circle">IW</div>
+            <div>
+              <div class="name">Ideoworks</div>
+              <div class="meta">ideoworks.id</div>
+              <a href="https://www.ideoworks.id" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Brand strategy and creative consultancy that grounds every recommendation in Indonesian consumer truth. Naming, positioning, architecture, and campaign concepting.</div>
+          <div class="caps">
+            <span class="cap-chip">STRATEGY</span>
+            <span class="cap-chip">BRANDING</span>
+            <span class="cap-chip">CREATIVE</span>
+          </div>
+        </div>
+
+        <!-- 3. Krona -->
+        <div class="member-card" data-caps="digital creative tech performance">
+          <div class="ident">
+            <div class="logo-circle">KR</div>
+            <div>
+              <div class="name">Krona</div>
+              <div class="meta">krona.co.id · Est. 2013 · 70+ team · 180+ clients</div>
+              <a href="https://www.krona.co.id" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Growth-partner agency combining creativity, data, and strategic thinking across 12+ industry verticals. Google-certified with deep experience in FMCG, Retail, and Tech.</div>
+          <div class="caps">
+            <span class="cap-chip">DIGITAL</span>
+            <span class="cap-chip">CONTENT</span>
+            <span class="cap-chip">WEB/APP</span>
+            <span class="cap-chip">SEO</span>
+            <span class="cap-chip">SEM</span>
+          </div>
+        </div>
+
+        <!-- 4. Meson Digital -->
+        <div class="member-card" data-caps="performance tech">
+          <div class="ident">
+            <div class="logo-circle">MD</div>
+            <div>
+              <div class="name">Meson Digital</div>
+              <div class="meta">meson-digital.com · Google Partner · 200+ clients</div>
+              <a href="https://www.meson-digital.com" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Data-driven performance agency with Google Partner and Meta certifications. End-to-end digital from SEO to paid media to CRO — measured to revenue, not clicks.</div>
+          <div class="caps">
+            <span class="cap-chip">PERFORMANCE</span>
+            <span class="cap-chip">SEO</span>
+            <span class="cap-chip">PAID MEDIA</span>
+            <span class="cap-chip">CRO</span>
+          </div>
+        </div>
+
+        <!-- 5. Ivosights -->
+        <div class="member-card" data-caps="data">
+          <div class="ident">
+            <div class="logo-circle">IV</div>
+            <div>
+              <div class="name">Ivosights</div>
+              <div class="meta">ivosights.com · 5,519+ projects · 500+ B2B clients</div>
+              <a href="https://www.ivosights.com" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Indonesia's most comprehensive customer engagement platform. Social listening (Ripple10), omni-channel CRM, WhatsApp automation, and big data analytics for enterprise brands.</div>
+          <div class="caps">
+            <span class="cap-chip">DATA</span>
+            <span class="cap-chip">SOCIAL LISTENING</span>
+            <span class="cap-chip">CX</span>
+            <span class="cap-chip">CRM</span>
+            <span class="cap-chip">ANALYTICS</span>
+          </div>
+        </div>
+
+        <!-- 6. KIM Communication -->
+        <div class="member-card" data-caps="pr">
+          <div class="ident">
+            <div class="logo-circle">KC</div>
+            <div>
+              <div class="name">KIM Communication</div>
+              <div class="meta">kimcommunication.com</div>
+              <a href="https://www.kimcommunication.com" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Strategic communications agency specialising in earned media, crisis communications, executive profiling, and event activation that moves the cultural conversation.</div>
+          <div class="caps">
+            <span class="cap-chip">PR</span>
+            <span class="cap-chip">EARNED MEDIA</span>
+            <span class="cap-chip">EVENTS</span>
+            <span class="cap-chip">CRISIS COMMS</span>
+          </div>
+        </div>
+
+        <!-- 7. Naik Kreatif -->
+        <div class="member-card" data-caps="branding creative">
+          <div class="ident">
+            <div class="logo-circle">NK</div>
+            <div>
+              <div class="name">Naik Kreatif</div>
+              <div class="meta">naikreatif.com · Est. 2015 · 270+ projects</div>
+              <a href="https://www.naikreatif.com" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Creative agency transforming brand visions into reality through innovative strategies, captivating design, and digital execution — from brand identity to social content at scale.</div>
+          <div class="caps">
+            <span class="cap-chip">BRANDING</span>
+            <span class="cap-chip">CREATIVE</span>
+            <span class="cap-chip">DIGITAL</span>
+            <span class="cap-chip">SOCIAL</span>
+            <span class="cap-chip">WEB</span>
+          </div>
+        </div>
+
+        <!-- 8. ADX Asia -->
+        <div class="member-card" data-caps="performance tech">
+          <div class="ident">
+            <div class="logo-circle">AX</div>
+            <div>
+              <div class="name">ADX Asia</div>
+              <div class="meta">adxasia.co.id</div>
+              <a href="https://www.adxasia.co.id" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Independent digital advertising specialist focused on programmatic media, audience targeting, and performance-driven campaigns across Indonesia's fragmented digital landscape.</div>
+          <div class="caps">
+            <span class="cap-chip">PROGRAMMATIC</span>
+            <span class="cap-chip">DISPLAY</span>
+            <span class="cap-chip">MEDIA PLANNING</span>
+            <span class="cap-chip">DIGITAL ADS</span>
+          </div>
+        </div>
+
+        <!-- 9. Seven Ads -->
+        <div class="member-card" data-caps="influencer">
+          <div class="ident">
+            <div class="logo-circle">SA</div>
+            <div>
+              <div class="name">Seven Ads</div>
+              <div class="meta">sevenads.id</div>
+              <a href="https://www.sevenads.id" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Indonesia's influencer and social specialist — managing KOLs, brand ambassadors, TikTok strategy, and paid social to build brand love at the cultural moment.</div>
+          <div class="caps">
+            <span class="cap-chip">INFLUENCER</span>
+            <span class="cap-chip">KOL</span>
+            <span class="cap-chip">SOCIAL</span>
+            <span class="cap-chip">TIKTOK</span>
+            <span class="cap-chip">PAID SOCIAL</span>
+          </div>
+        </div>
+
+        <!-- 10. Game Level One -->
+        <div class="member-card" data-caps="gaming tech">
+          <div class="ident">
+            <div class="logo-circle">GL</div>
+            <div>
+              <div class="name">Game Level One</div>
+              <div class="meta">gamelevelone.com</div>
+              <a href="https://www.gamelevelone.com" target="_blank" rel="noopener" class="site-link">Visit website ↗</a>
+            </div>
+          </div>
+          <div class="blurb">Game and AR development studio turning brand activations into interactive experiences. Gamification solutions that boost engagement by 48% and brand loyalty by 40%.</div>
+          <div class="caps">
+            <span class="cap-chip">GAMIFICATION</span>
+            <span class="cap-chip">AR/XR</span>
+            <span class="cap-chip">INTERACTIVE</span>
+            <span class="cap-chip">GAMING</span>
+            <span class="cap-chip">ACTIVATION</span>
+          </div>
+        </div>
+
+      </div><!-- /member-list -->
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TEAM COMPOSITION SCENARIOS                                    -->
+  <!-- ============================================================ -->
+  <section class="section-ink">
+    <div class="wrap">
+      <span class="eyebrow on-ink">How teams form</span>
+      <div class="section-head" style="margin-top: 20px;">
+        <h2>Sample team compositions for real briefs.</h2>
+        <p class="lede" style="color: var(--muted-on-ink);">The alliance assembles a bespoke team for every brief. Here are three examples of how member agencies combine to tackle real-world challenges.</p>
+      </div>
+
+      <div class="scenarios">
+
+        <div class="scenario-card">
+          <div class="sc-type">Brief Type 01</div>
+          <h3>FMCG Launch</h3>
+          <p style="font-size: 14px; color: var(--muted-on-ink); margin: 0; line-height: 1.55;">Full-funnel launch for a new consumer packaged goods brand entering the Indonesian market.</p>
+          <div class="sc-members">
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Ideoworks</div>
+                <div class="sc-role">Brand Strategy &amp; Positioning</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Omeoo Creative</div>
+                <div class="sc-role">Creative + Social Production</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Meson Digital</div>
+                <div class="sc-role">Performance Media</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">KIM Communication</div>
+                <div class="sc-role">PR &amp; Earned Media</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="sc-type">Brief Type 02</div>
+          <h3>Tech Brand Build</h3>
+          <p style="font-size: 14px; color: var(--muted-on-ink); margin: 0; line-height: 1.55;">End-to-end brand and digital presence for a B2B tech company scaling into Indonesia.</p>
+          <div class="sc-members">
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Krona</div>
+                <div class="sc-role">Brand + Digital Marketing</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Naik Kreatif</div>
+                <div class="sc-role">Brand Identity &amp; Design</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">ADX Asia</div>
+                <div class="sc-role">Programmatic Media Planning</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Ivosights</div>
+                <div class="sc-role">Data Analytics &amp; Listening</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="sc-type">Brief Type 03</div>
+          <h3>Consumer Engagement</h3>
+          <p style="font-size: 14px; color: var(--muted-on-ink); margin: 0; line-height: 1.55;">Always-on engagement campaign combining gamification, influencer, content, and paid amplification.</p>
+          <div class="sc-members">
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Game Level One</div>
+                <div class="sc-role">Gamification + AR Activation</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Seven Ads</div>
+                <div class="sc-role">Influencer &amp; KOL Management</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Omeoo Creative</div>
+                <div class="sc-role">Content Production</div>
+              </div>
+            </div>
+            <div class="sc-member">
+              <span class="sc-dot"></span>
+              <div>
+                <div class="sc-agency">Meson Digital</div>
+                <div class="sc-role">Paid Media Amplification</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CTA BAND                                                       -->
+  <!-- ============================================================ -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Brief us. We'll propose a team in 48 hours.</h2>
+      <div class="row">
+        <p style="font-size: 18px; max-width: 52ch; margin: 0; opacity: 0.9; line-height: 1.5;">Drop your business challenge. A regional lead will review your brief and respond with a proposed specialist team and a working-session date.</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-outline">Brief the alliance →</a>
+          <a href="about.html" class="btn btn-outline">About the alliance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <!-- React + Babel CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" src="assets/tweaks-panel.jsx"></script>
+  <script type="text/babel" src="assets/tweaks.jsx"></script>
+  <script src="assets/site.js"></script>
+
+  <script>
+    // Member filter logic
+    (function () {
+      const bar = document.getElementById('filter-bar');
+      const list = document.getElementById('member-list');
+
+      if (!bar || !list) return;
+
+      bar.addEventListener('click', function (e) {
+        const chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+
+        // Update active chip
+        bar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        const filter = chip.dataset.filter;
+
+        list.querySelectorAll('.member-card').forEach(card => {
+          if (filter === 'all') {
+            card.style.display = '';
+          } else {
+            const caps = (card.dataset.caps || '').toLowerCase();
+            card.style.display = caps.includes(filter) ? '' : 'none';
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
