@@ -7,7 +7,7 @@
       <div class="wrap nav-inner">
         <a href="index.html" class="brand" aria-label="SAMA Alliance Indonesia">
           <img src="assets/sama-logo.svg" alt="SAMA — Strategic Asia Marketing Alliance" class="brand-logo" />
-          <span class="brand-chapter">Indonesia<br /><em>Chapter</em></span>
+          <span class="brand-chapter">Indonesia<br /><em>Region</em></span>
         </a>
         <ul class="nav-links">
           <li><a href="index.html" data-page="home">Home</a></li>
@@ -30,10 +30,10 @@
           <div>
             <a href="index.html" class="brand" style="margin-bottom: 20px;">
               <img src="assets/sama-logo-light.svg" alt="SAMA — Strategic Asia Marketing Alliance" class="brand-logo" />
-              <span class="brand-chapter on-ink">Indonesia<br /><em>Chapter</em></span>
+              <span class="brand-chapter on-ink">Indonesia<br /><em>Region</em></span>
             </a>
             <p style="max-width: 36ch; color: var(--muted-on-ink); font-size: 14px; margin: 16px 0 0;">
-              The Indonesia chapter of the Strategic Asia Marketing Alliance — uniting independent marketing &amp; technology agencies to serve brands beyond boundaries.
+              The Indonesia region of the Strategic Asia Marketing Alliance — uniting independent marketing &amp; technology agencies to serve brands beyond boundaries.
             </p>
           </div>
           <div>
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="footer-meta">
-          <span>© 2026 SAMA Alliance Indonesia · A chapter of Strategic Asia Marketing Alliance</span>
+          <span>© 2026 SAMA Alliance Indonesia · A region of Strategic Asia Marketing Alliance</span>
           <div class="footer-socials">
             <a href="#">LinkedIn ↗</a>
             <a href="#">Instagram ↗</a>
