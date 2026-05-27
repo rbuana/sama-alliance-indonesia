@@ -509,9 +509,48 @@
     .lead-form-card h3 { font-size: 24px; letter-spacing: -0.02em; margin: 0 0 24px; color: var(--cream); }
     .lead-form-card .form-grid { gap: 18px; }
 
+    /* JOURNEY DONUT SECTION */
+    .journey { padding: clamp(80px, 10vw, 120px) 0; background: #f4f0e8; }
+    .journey-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(40px, 6vw, 80px); align-items: center; }
+    .journey-svg-wrap { max-width: 460px; width: 100%; margin: 0 auto; }
+    .journey-svg-wrap svg { width: 100%; height: auto; overflow: visible; }
+    .dseg { cursor: pointer; transition: opacity 180ms, filter 180ms; opacity: 0.72; }
+    .dseg.active { opacity: 1; filter: drop-shadow(0 6px 18px rgba(0,0,0,0.28)); }
+    .dseg:hover:not(.active) { opacity: 0.9; }
+
+    .journey-panel { display: flex; flex-direction: column; gap: 10px; }
+    .jp-item {
+      background: white;
+      border: 1px solid rgba(10,31,61,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow 160ms;
+    }
+    .jp-item:hover { box-shadow: 0 6px 20px rgba(10,31,61,0.09); }
+    .jp-item-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      user-select: none;
+    }
+    .jp-chev { color: var(--fire); font-size: 18px; line-height: 1; transition: transform 200ms; flex-shrink: 0; }
+    .jp-item.open .jp-chev { transform: rotate(180deg); }
+    .jp-item-body {
+      display: none;
+      padding: 0 22px 18px;
+      font-size: 14px;
+      color: var(--muted-on-cream);
+      line-height: 1.6;
+    }
+    .jp-item.open .jp-item-body { display: block; }
+
     /* RESPONSIVE */
     @media (max-width: 980px) {
-      .cv-split, .feature-card, .ready-card, .platform-grid, .lc-panel.active { grid-template-columns: 1fr; }
+      .cv-split, .feature-card, .ready-card, .platform-grid, .lc-panel.active, .journey-layout { grid-template-columns: 1fr; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       .logo-row { grid-template-columns: repeat(3, 1fr); }
       .craft-grid, .whats-grid { grid-template-columns: 1fr; }
@@ -621,6 +660,157 @@
     </div>
   </div>
 </section>
+
+<!-- ============ CAMPAIGN JOURNEY DONUT ============ -->
+<section class="journey" data-screen-label="Home / Campaign Journey">
+  <div class="wrap">
+    <div style="text-align: center; max-width: 680px; margin: 0 auto 64px;">
+      <span class="eyebrow" style="justify-content: center;">The campaign journey</span>
+      <h2 style="margin-top: 20px; font-size: clamp(32px, 4vw, 52px);">With one alliance managing every phase,<br />you can focus on what matters.</h2>
+    </div>
+    <div class="journey-layout">
+
+      <!-- Donut chart -->
+      <div class="journey-svg-wrap">
+        <svg id="journey-donut" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Arc paths for text labels — right side CW, left side CCW reversed so text reads outward -->
+            <path id="tp-intake"   d="M 232.54 40.44  A 180 180 0 0 1 399.56 207.46"/>
+            <path id="tp-assemble" d="M 399.56 232.54 A 180 180 0 0 1 232.54 399.56"/>
+            <path id="tp-execute"  d="M 40.44 232.56  A 180 180 0 0 0 207.44 399.56"/>
+            <path id="tp-prove"    d="M 207.44 40.44  A 180 180 0 0 0 40.44 207.44"/>
+          </defs>
+
+          <!-- Dashed orbit ring -->
+          <circle cx="220" cy="220" r="204" fill="none" stroke="rgba(10,31,61,0.08)" stroke-width="1" stroke-dasharray="3 9"/>
+
+          <!-- Segment: INTAKE (top-right) — fire orange, default active -->
+          <path class="dseg active" id="dseg-intake" data-phase="0" fill="#ff4719"
+            d="M 231.51 55.40 A 165 165 0 0 1 384.60 208.49 L 314.77 213.37 A 95 95 0 0 0 226.63 125.23 Z"/>
+          <!-- Segment: ASSEMBLE (bottom-right) — mid navy -->
+          <path class="dseg" id="dseg-assemble" data-phase="1" fill="#0a2d5a"
+            d="M 384.60 231.51 A 165 165 0 0 1 231.51 384.60 L 226.63 314.77 A 95 95 0 0 0 314.77 226.63 Z"/>
+          <!-- Segment: EXECUTE (bottom-left) -->
+          <path class="dseg" id="dseg-execute" data-phase="2" fill="#1a3d6e"
+            d="M 208.49 384.60 A 165 165 0 0 1 55.40 231.51 L 125.23 226.63 A 95 95 0 0 0 213.37 314.77 Z"/>
+          <!-- Segment: PROVE (top-left) — deep ink -->
+          <path class="dseg" id="dseg-prove" data-phase="3" fill="#0a1f3d"
+            d="M 55.40 208.49 A 165 165 0 0 1 208.49 55.40 L 213.37 125.23 A 95 95 0 0 0 125.23 213.37 Z"/>
+
+          <!-- Corner L-tick marks at quadrant boundaries -->
+          <g stroke="rgba(10,31,61,0.22)" stroke-width="1.5" stroke-linecap="square">
+            <polyline points="212,8 200,8 200,20"/>
+            <polyline points="426,212 426,224 414,224"/>
+            <polyline points="228,432 240,432 240,420"/>
+            <polyline points="14,228 14,216 26,216"/>
+          </g>
+
+          <!-- White center hole -->
+          <circle cx="220" cy="220" r="92" fill="white"/>
+
+          <!-- Center labels — updated by JS on segment click -->
+          <text id="c-num" x="220" y="196" text-anchor="middle"
+            font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2.5" fill="#ff4719">01 · INTAKE</text>
+          <text id="c-name" x="220" y="222" text-anchor="middle"
+            font-family="'Plus Jakarta Sans',sans-serif" font-size="20" font-weight="600" fill="#ff4719">Intake</text>
+          <text id="c-desc" x="220" y="242" text-anchor="middle"
+            font-family="'Plus Jakarta Sans',sans-serif" font-size="10.5" fill="#5c7591">Your brief lands here</text>
+
+          <!-- Arc text labels along outer edge of each segment -->
+          <text font-family="'Plus Jakarta Sans',sans-serif" font-size="11.5" font-weight="700" fill="white" letter-spacing="2.2">
+            <textPath href="#tp-intake"   startOffset="50%" text-anchor="middle">INTAKE</textPath>
+          </text>
+          <text font-family="'Plus Jakarta Sans',sans-serif" font-size="11.5" font-weight="700" fill="white" letter-spacing="2.2">
+            <textPath href="#tp-assemble" startOffset="50%" text-anchor="middle">ASSEMBLE</textPath>
+          </text>
+          <text font-family="'Plus Jakarta Sans',sans-serif" font-size="11.5" font-weight="700" fill="white" letter-spacing="2.2">
+            <textPath href="#tp-execute"  startOffset="50%" text-anchor="middle">EXECUTE</textPath>
+          </text>
+          <text font-family="'Plus Jakarta Sans',sans-serif" font-size="11.5" font-weight="700" fill="white" letter-spacing="2.2">
+            <textPath href="#tp-prove"    startOffset="50%" text-anchor="middle">PROVE</textPath>
+          </text>
+        </svg>
+      </div>
+
+      <!-- Right accordion panel (populated by JS) -->
+      <div class="journey-panel" id="journey-panel"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var phases = [
+    {
+      num: '01', label: 'Intake', desc: 'Your brief lands here', color: '#ff4719',
+      items: [
+        { t: 'Brief intake call', b: 'Working session within 48 hours to align on business outcomes, audience, and success metrics.' },
+        { t: 'Cultural & market read', b: 'Strategy lead sets the Indonesian consumer truth before recommending any channel or tactic.' },
+        { t: 'Commercial framing', b: 'One contract, one P&L. No procurement gridlock across five separate agencies.' },
+        { t: 'Outcome metric alignment', b: 'We agree upfront on the KPIs that matter to your CFO — not just reach and impressions.' }
+      ]
+    },
+    {
+      num: '02', label: 'Assemble', desc: 'The best team, per brief', color: '#0a2d5a',
+      items: [
+        { t: 'Craft-based selection', b: 'Best PR shop runs PR. Best gaming studio runs gaming. Every time — not whoever is next in the queue.' },
+        { t: 'Founder-level senior team', b: 'The people who pitch you are the people who do the work. No bait-and-switch on seniority.' },
+        { t: 'Pre-aligned ways of working', b: 'Shared toolkit, naming, status cadence — zero re-onboarding tax across studios.' },
+        { t: 'Commercial structure', b: 'Cross-agency budget allocation handled internally. One rate card, one invoice to your finance team.' }
+      ]
+    },
+    {
+      num: '03', label: 'Execute', desc: 'Borderless, in lockstep', color: '#1a3d6e',
+      items: [
+        { t: 'Single delivery ritual', b: 'One weekly stand-up across all studios on the brief. Everyone on the same call.' },
+        { t: 'Shared production pipeline', b: 'Brand assets, content, and code flow through a common drive and PM tool — visible to the brand.' },
+        { t: 'Live channel orchestration', b: 'Media, social, PR, and tech coordinated in real time from a single war room.' },
+        { t: 'Real-time adjustments', b: 'Budget and resource re-allocated within the alliance as performance data comes in — no new negotiations.' }
+      ]
+    },
+    {
+      num: '04', label: 'Prove', desc: 'Outcomes, not impressions', color: '#0a1f3d',
+      items: [
+        { t: 'Outcome-linked dashboards', b: 'Brand lift, pipeline, revenue contribution — reported alongside reach. Built by Meson Digital + Omeoo.' },
+        { t: 'Cross-channel attribution', b: 'Every activation mapped back to business outcomes across the full funnel.' },
+        { t: 'Quarterly business review', b: 'Honest reflection on what worked, what did not, and what changes next quarter.' },
+        { t: 'Next brief recommendation', b: 'The QBR ends with a proposed next brief — so momentum continues without a gap.' }
+      ]
+    }
+  ];
+  var segIds = ['intake','assemble','execute','prove'];
+
+  function setPhase(i) {
+    var p = phases[i];
+    segIds.forEach(function(s, j) {
+      var el = document.getElementById('dseg-' + s);
+      if (el) el.classList.toggle('active', j === i);
+    });
+    var num  = document.getElementById('c-num');
+    var name = document.getElementById('c-name');
+    var desc = document.getElementById('c-desc');
+    if (num)  { num.textContent  = p.num + ' \xB7 ' + p.label.toUpperCase(); num.setAttribute('fill', p.color); }
+    if (name) { name.textContent = p.label; name.setAttribute('fill', p.color); }
+    if (desc)   desc.textContent = p.desc;
+
+    var panel = document.getElementById('journey-panel');
+    if (!panel) return;
+    panel.innerHTML = p.items.map(function(item, idx) {
+      return '<div class="jp-item' + (idx === 0 ? ' open' : '') + '" onclick="this.classList.toggle(\'open\')">' +
+        '<div class="jp-item-head"><span>' + item.t + '</span><span class="jp-chev">&#x2304;</span></div>' +
+        '<div class="jp-item-body">' + item.b + '</div></div>';
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    segIds.forEach(function(s, i) {
+      var el = document.getElementById('dseg-' + s);
+      if (el) el.addEventListener('click', function() { setPhase(i); });
+    });
+    setPhase(0);
+  });
+})();
+</script>
 
 <!-- ============ STATS BAND ============ -->
 <section class="stats-band" data-screen-label="Home / Stats">
