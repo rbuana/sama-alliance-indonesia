@@ -9,19 +9,19 @@
   const navHTML = `
     <nav class="nav">
       <div class="wrap nav-inner">
-        <a href="index.html" class="brand" aria-label="SAMA Alliance Indonesia">
+        <a href="/" class="brand" aria-label="SAMA Alliance Indonesia">
           <img src="${navLogo}" alt="SAMA — Strategic Asia Marketing Alliance" class="brand-logo" />
           <span class="${chapterClass}">Indonesia<br /><em>Region</em></span>
         </a>
         <ul class="nav-links">
-          <li><a href="index.html" data-page="home">Home</a></li>
-          <li><a href="about.html" data-page="about">About</a></li>
-          <li><a href="members.html" data-page="members">Members</a></li>
-          <li><a href="capabilities.html" data-page="capabilities">Capabilities</a></li>
-          <li><a href="insights.html" data-page="insights">Insights</a></li>
+          <li><a href="/" data-page="home">Home</a></li>
+          <li><a href="/about" data-page="about">About</a></li>
+          <li><a href="/members" data-page="members">Members</a></li>
+          <li><a href="/capabilities" data-page="capabilities">Capabilities</a></li>
+          <li><a href="/insights" data-page="insights">Insights</a></li>
         </ul>
         <div class="nav-right">
-          <a href="contact.html" class="btn btn-primary btn-sm">Start a Conversation</a>
+          <a href="/contact" class="btn btn-primary btn-sm">Start a Conversation</a>
         </div>
       </div>
     </nav>
@@ -32,7 +32,7 @@
       <div class="wrap">
         <div class="footer-grid">
           <div>
-            <a href="index.html" class="brand" style="margin-bottom: 20px;">
+            <a href="/" class="brand" style="margin-bottom: 20px;">
               <img src="assets/sama-logo-light.svg" alt="SAMA — Strategic Asia Marketing Alliance" class="brand-logo" />
               <span class="brand-chapter on-ink">Indonesia<br /><em>Region</em></span>
             </a>
@@ -43,26 +43,26 @@
           <div>
             <h5>Explore</h5>
             <ul>
-              <li><a href="about.html">About</a></li>
-              <li><a href="members.html">Members</a></li>
-              <li><a href="capabilities.html">Capabilities</a></li>
-              <li><a href="insights.html">Insights &amp; Events</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/members">Members</a></li>
+              <li><a href="/capabilities">Capabilities</a></li>
+              <li><a href="/insights">Insights &amp; Events</a></li>
             </ul>
           </div>
           <div>
             <h5>For Brands</h5>
             <ul>
-              <li><a href="contact.html">Find an agency partner</a></li>
-              <li><a href="contact.html">Brief the alliance</a></li>
-              <li><a href="contact.html">Regional expansion</a></li>
+              <li><a href="/contact">Find an agency partner</a></li>
+              <li><a href="/contact">Brief the alliance</a></li>
+              <li><a href="/contact">Regional expansion</a></li>
             </ul>
           </div>
           <div>
             <h5>For Agencies</h5>
             <ul>
-              <li><a href="contact.html">Apply for membership</a></li>
-              <li><a href="contact.html">Partnership inquiries</a></li>
-              <li><a href="contact.html">Press &amp; media</a></li>
+              <li><a href="/contact">Apply for membership</a></li>
+              <li><a href="/contact">Partnership inquiries</a></li>
+              <li><a href="/contact">Press &amp; media</a></li>
             </ul>
           </div>
         </div>
