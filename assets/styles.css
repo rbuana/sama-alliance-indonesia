@@ -169,17 +169,19 @@ section { padding: clamp(80px, 10vw, 140px) 0; }
   color: var(--cream);
   opacity: 0.78;
   transition: opacity 160ms, background 160ms;
+  position: relative;
 }
 .nav-links a:hover { opacity: 1; background: rgba(245, 241, 234, 0.06); }
 .nav-links a.active { opacity: 1; color: var(--cream); }
 .nav-links a.active::after {
   content: '';
-  display: block;
+  position: absolute;
+  bottom: 4px;
+  left: 14px;
+  right: 14px;
   height: 2px;
   background: var(--fire);
-  margin-top: 6px;
-  margin-left: 14px;
-  margin-right: 14px;
+  border-radius: 1px;
 }
 .nav-right { display: flex; align-items: center; gap: 12px; }
 
