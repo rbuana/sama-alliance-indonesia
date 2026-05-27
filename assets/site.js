@@ -2,12 +2,16 @@
 (function () {
   const CURRENT = (document.body.dataset.page || 'home').toLowerCase();
 
+  const isHome = CURRENT === 'home';
+  const navLogo = isHome ? 'assets/sama-logo.svg' : 'assets/sama-logo-light.svg';
+  const chapterClass = isHome ? 'brand-chapter' : 'brand-chapter on-ink';
+
   const navHTML = `
     <nav class="nav">
       <div class="wrap nav-inner">
         <a href="index.html" class="brand" aria-label="SAMA Alliance Indonesia">
-          <img src="assets/sama-logo.svg" alt="SAMA — Strategic Asia Marketing Alliance" class="brand-logo" />
-          <span class="brand-chapter">Indonesia<br /><em>Region</em></span>
+          <img src="${navLogo}" alt="SAMA — Strategic Asia Marketing Alliance" class="brand-logo" />
+          <span class="${chapterClass}">Indonesia<br /><em>Region</em></span>
         </a>
         <ul class="nav-links">
           <li><a href="index.html" data-page="home">Home</a></li>
